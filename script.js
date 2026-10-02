@@ -1,773 +1,979 @@
-/* =====================================================
-   PROGRAMACAO.exe
-   SCRIPT.JS
-===================================================== */
+/* ================================= */
+/* MATRIX BACKGROUND */
+/* ================================= */
 
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-/* =====================================================
-   MATRIX
-===================================================== */
+let matrixWidth;
+let matrixHeight;
+let columns;
+let drops;
 
-const matrix = document.getElementById("matrix");
+function iniciarMatrix() {
 
-const caracteres =
-    "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}[]<>/\\#$%@&*";
+    matrixWidth = canvas.width = window.innerWidth;
+    matrixHeight = canvas.height = window.innerHeight;
 
-for (let i = 0; i < 85; i++) {
+    const fontSize = 14;
 
-    const coluna =
-        document.createElement("div");
+    columns = Math.floor(matrixWidth / fontSize);
 
-    coluna.className =
-        "matrix-column";
+    drops = [];
 
-    let texto = "";
-
-    const quantidade =
-        Math.floor(Math.random() * 25) + 15;
-
-    for (let j = 0; j < quantidade; j++) {
-
-        texto +=
-            caracteres[
-                Math.floor(
-                    Math.random() *
-                    caracteres.length
-                )
-            ];
-
-        texto += "\n";
+    for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -50;
     }
 
-    coluna.textContent = texto;
+    function desenharMatrix() {
 
-    coluna.style.left =
-        Math.random() * 100 + "%";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.06)";
+        ctx.fillRect(0, 0, matrixWidth, matrixHeight);
 
-    coluna.style.animationDuration =
-        (Math.random() * 8 + 5) + "s";
+        ctx.fillStyle = "#00ff66";
+        ctx.font = `${fontSize}px monospace`;
 
-    coluna.style.animationDelay =
-        Math.random() * 5 + "s";
+        for (let i = 0; i < drops.length; i++) {
 
-    matrix.appendChild(coluna);
+            const caracteres =
+                "01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            const texto =
+                caracteres[Math.floor(Math.random() * caracteres.length)];
+
+            ctx.fillText(
+                texto,
+                i * fontSize,
+                drops[i] * fontSize
+            );
+
+            if (
+                drops[i] * fontSize > matrixHeight &&
+                Math.random() > 0.975
+            ) {
+                drops[i] = 0;
+            }
+
+            drops[i] += 0.7;
+        }
+    }
+
+    setInterval(desenharMatrix, 45);
 }
 
+iniciarMatrix();
 
-/* =====================================================
-   TERMINAL DO HERO
-===================================================== */
-
-const terminalText =
-    document.getElementById("terminalText");
-
-const linhasTerminal = [
-
-    "> inicializando PROGRAMACAO.exe...",
-
-    "> carregando módulos...",
-
-    "> verificando sistema...",
-
-    "> conexão estabelecida.",
-
-    "> sistema pronto.",
-
-    "> acesso concedido_"
-
-];
-
-let linhaAtual = 0;
-
-function escreverTerminal() {
-
-    if (linhaAtual >= linhasTerminal.length) {
-        return;
-    }
-
-    const linha =
-        document.createElement("div");
-
-    linha.textContent =
-        linhasTerminal[linhaAtual];
-
-    terminalText.appendChild(linha);
-
-    linhaAtual++;
-
-    setTimeout(
-        escreverTerminal,
-        600
-    );
-}
-
-escreverTerminal();
+window.addEventListener("resize", () => {
+    iniciarMatrix();
+});
 
 
-/* =====================================================
-   APRENDIZADO
-===================================================== */
+/* ================================= */
+/* AULAS */
+/* ================================= */
 
-const conteudos = {
+const aulas = {
 
-    programacao: {
+    programacao: `
+        <h2>COMO FUNCIONA A <span>PROGRAMAÇÃO</span></h2>
 
-        titulo:
-            "COMO FUNCIONA A PROGRAMAÇÃO",
+        <p>
+            Programação é o processo de escrever instruções
+            que um computador consegue executar.
+        </p>
 
-        texto: `
+        <p>
+            Essas instruções podem usar variáveis, condições,
+            funções, loops e algoritmos para resolver problemas.
+        </p>
 
-            <h3>Como funciona a programação?</h3>
+        <p>
+            Pense em um programa como uma sequência de ordens:
+            entrada → processamento → resultado.
+        </p>
+    `,
 
-            <p>
-                Programação é o processo de criar
-                instruções que um computador consegue
-                executar.
-            </p>
+    criacao: `
+        <h2>O QUE VOCÊ PODE <span>CRIAR</span></h2>
 
-            <p>
-                Um programa normalmente trabalha
-                com dados, decisões, repetições
-                e funções.
-            </p>
+        <p>
+            Com programação você pode criar sites, jogos,
+            aplicativos, ferramentas, sistemas e experiências
+            interativas.
+        </p>
 
-            <p>
-                Por exemplo, podemos dizer:
-                se o jogador tiver 10 pontos,
-                mostre uma mensagem.
-            </p>
+        <p>
+            HTML estrutura uma página, CSS cuida da aparência
+            e JavaScript adiciona comportamento.
+        </p>
 
-            <p>
-                Linguagens como JavaScript,
-                Python, Java e C++ permitem
-                transformar essas ideias em código.
-            </p>
+        <p>
+            O limite principal é sua criatividade e o que você
+            aprende ao longo do caminho.
+        </p>
+    `,
 
-        `
+    comecar: `
+        <h2>COMEÇANDO DO <span>ZERO</span></h2>
 
-    },
+        <p>
+            Uma boa sequência para começar é aprender lógica
+            de programação e depois praticar com projetos pequenos.
+        </p>
 
+        <p>
+            Para a web, uma sequência simples é:
+            HTML → CSS → JavaScript.
+        </p>
 
-    criacao: {
-
-        titulo:
-            "COISAS QUE VOCÊ PODE CRIAR",
-
-        texto: `
-
-            <h3>O que a programação permite criar?</h3>
-
-            <p>
-                Programação pode ser usada para
-                criar jogos, sites, aplicativos,
-                ferramentas e sistemas.
-            </p>
-
-            <p>
-                Também pode ser usada para
-                inteligência artificial,
-                automação, análise de dados
-                e muitas outras áreas.
-            </p>
-
-            <p>
-                O limite principal é a combinação
-                entre criatividade, conhecimento
-                e tecnologia disponível.
-            </p>
-
-        `
-
-    },
-
-
-    comecar: {
-
-        titulo:
-            "COMO COMEÇAR DO ZERO",
-
-        texto: `
-
-            <h3>Começando a programar</h3>
-
-            <p>
-                Primeiro escolha uma linguagem
-                adequada para o que você deseja
-                construir.
-            </p>
-
-            <p>
-                Para sites, HTML, CSS e JavaScript
-                são uma ótima combinação.
-            </p>
-
-            <p>
-                Depois aprenda variáveis,
-                condições, loops, funções
-                e estruturas de dados.
-            </p>
-
-            <p>
-                O mais importante é praticar
-                criando pequenos projetos.
-            </p>
-
-        `
-
-    }
-
+        <p>
+            Não tente aprender tudo de uma vez.
+            Crie projetos pequenos e aumente a dificuldade
+            aos poucos.
+        </p>
+    `
 };
 
+function mostrarAula(tipo) {
 
-function abrirConteudo(tipo) {
+    const content = document.getElementById("aulaContent");
 
-    const conteudo =
-        document.getElementById("conteudo");
+    content.innerHTML = aulas[tipo];
 
-    const contentText =
-        document.getElementById("contentText");
+    abrirModal("aulaModal");
+}
 
-    contentText.innerHTML =
-        conteudos[tipo].texto;
 
-    conteudo.classList.add("active");
+/* ================================= */
+/* PESQUISA */
+/* ================================= */
 
-    conteudo.scrollIntoView({
-        behavior: "smooth"
+function pesquisarAulas() {
+
+    const termo =
+        document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".learning-card");
+
+    cards.forEach(card => {
+
+        const texto =
+            card.innerText.toLowerCase();
+
+        card.style.display =
+            texto.includes(termo)
+                ? ""
+                : "none";
     });
 }
 
 
-function fecharConteudo() {
+/* ================================= */
+/* MODAIS */
+/* ================================= */
 
-    document
-        .getElementById("conteudo")
-        .classList.remove("active");
-}
+function abrirModal(id) {
 
+    const modal = document.getElementById(id);
 
-/* =====================================================
-   PESQUISA
-===================================================== */
-
-const searchInput =
-    document.getElementById("searchInput");
-
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "input",
-        function () {
-
-            const busca =
-                this.value.toLowerCase();
-
-            const cards =
-                document.querySelectorAll(
-                    "#learningCards .card"
-                );
-
-            cards.forEach(card => {
-
-                const texto =
-                    card.textContent.toLowerCase();
-
-                if (texto.includes(busca)) {
-
-                    card.style.display =
-                        "";
-
-                } else {
-
-                    card.style.display =
-                        "none";
-
-                }
-
-            });
-
-        }
-    );
-}
-
-
-/* =====================================================
-   TERMINAL
-===================================================== */
-
-const terminalButton =
-    document.getElementById(
-        "terminalButton"
-    );
-
-const terminalModal =
-    document.getElementById(
-        "terminalModal"
-    );
-
-const commandInput =
-    document.getElementById(
-        "commandInput"
-    );
-
-const terminalScreen =
-    document.getElementById(
-        "terminalScreen"
-    );
-
-
-terminalButton.addEventListener(
-    "click",
-    function () {
-
-        terminalModal.classList.add(
-            "active"
-        );
-
-        setTimeout(() => {
-
-            commandInput.focus();
-
-        }, 100);
-
+    if (modal) {
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
     }
-);
-
-
-function fecharTerminal() {
-
-    terminalModal.classList.remove(
-        "active"
-    );
 }
 
+function fecharModal(id) {
 
-function escreverTerminalLinha(texto) {
+    const modal = document.getElementById(id);
 
-    const linha =
-        document.createElement("p");
-
-    linha.innerHTML =
-        texto;
-
-    terminalScreen.insertBefore(
-        linha,
-        document.querySelector(
-            ".terminal-input"
-        )
-    );
-}
-
-
-commandInput.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (event.key !== "Enter") {
-            return;
-        }
-
-        const comando =
-            commandInput.value
-                .trim()
-                .toLowerCase();
-
-        commandInput.value = "";
-
-        if (!comando) {
-            return;
-        }
-
-
-        escreverTerminalLinha(
-            "&gt; " + comando
-        );
-
-
-        if (comando === "help") {
-
-            escreverTerminalLinha(
-                "Comandos: help, about, status, projects, learn, clear"
-            );
-
-        }
-
-        else if (comando === "about") {
-
-            escreverTerminalLinha(
-                "PROGRAMACAO.exe — central de aprendizado e projetos."
-            );
-
-        }
-
-        else if (comando === "status") {
-
-            escreverTerminalLinha(
-                "STATUS: ONLINE | SISTEMA: OPERACIONAL | VERSÃO: 2.0"
-            );
-
-        }
-
-        else if (comando === "projects") {
-
-            escreverTerminalLinha(
-                "Projetos: JOGOS, SITES, APLICATIVOS, IA, AUTOMAÇÃO, FERRAMENTAS."
-            );
-
-        }
-
-        else if (comando === "learn") {
-
-            escreverTerminalLinha(
-                "Módulos de aprendizado disponíveis: 03."
-            );
-
-        }
-
-        else if (comando === "clear") {
-
-            terminalScreen.innerHTML = `
-
-                <p>
-                    &gt; Terminal limpo.
-                </p>
-
-                <div class="terminal-input">
-
-                    <span>&gt;</span>
-
-                    <input
-                        id="commandInput"
-                        type="text"
-                        placeholder="digite um comando..."
-                    >
-
-                </div>
-
-            `;
-
-            configurarNovoTerminal();
-
-        }
-
-        else {
-
-            escreverTerminalLinha(
-                "Comando não encontrado. Digite 'help'."
-            );
-
-        }
-
+    if (modal) {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
     }
-);
+}
 
+document.querySelectorAll(".modal").forEach(modal => {
 
-function configurarNovoTerminal() {
+    modal.addEventListener("click", event => {
 
-    const novoInput =
-        document.getElementById(
-            "commandInput"
-        );
-
-    novoInput.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (event.key === "Enter") {
-
-                commandInput.dispatchEvent(
-                    new KeyboardEvent(
-                        "keydown",
-                        {
-                            key: "Enter"
-                        }
-                    )
-                );
-
-            }
-
+        if (event.target === modal) {
+            modal.classList.remove("active");
+            document.body.style.overflow = "";
         }
-    );
+
+    });
+
+});
+
+document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+
+        document.querySelectorAll(".modal").forEach(modal => {
+            modal.classList.remove("active");
+        });
+
+        document.body.style.overflow = "";
+    }
+
+});
+
+
+/* ================================= */
+/* TERMINAL */
+/* ================================= */
+
+function abrirTerminal() {
+
+    abrirModal("terminalModal");
+
+    setTimeout(() => {
+
+        document
+            .getElementById("terminalInput")
+            .focus();
+
+    }, 100);
 }
 
+function terminalCommand(event) {
 
-/* =====================================================
-   MENSAGEM DOS PROJETOS
-===================================================== */
-
-function mostrarEmBreve(nome) {
-
-    alert(
-        nome +
-        " será o próximo módulo funcional do PROGRAMACAO.exe."
-    );
-}
-
-
-/* =====================================================
-   JOGOS.exe
-===================================================== */
-
-const jogosModal =
-    document.getElementById(
-        "jogosModal"
-    );
-
-const neonGame =
-    document.getElementById(
-        "neonGame"
-    );
-
-const alvo =
-    document.getElementById(
-        "alvo"
-    );
-
-const campoJogo =
-    document.getElementById(
-        "campoJogo"
-    );
-
-const pontosTexto =
-    document.getElementById(
-        "pontos"
-    );
-
-const tempoTexto =
-    document.getElementById(
-        "tempo"
-    );
-
-const inicioJogo =
-    document.getElementById(
-        "inicioJogo"
-    );
-
-const fimJogo =
-    document.getElementById(
-        "fimJogo"
-    );
-
-const pontuacaoFinal =
-    document.getElementById(
-        "pontuacaoFinal"
-    );
-
-
-let pontos = 0;
-
-let tempo = 30;
-
-let intervaloJogo = null;
-
-let partidaAtiva = false;
-
-
-/* ABRIR JOGOS */
-
-function abrirJogos() {
-
-    jogosModal.classList.add(
-        "active"
-    );
-
-    neonGame.style.display =
-        "none";
-
-    clearInterval(
-        intervaloJogo
-    );
-
-    partidaAtiva = false;
-}
-
-
-/* FECHAR JOGOS */
-
-function fecharJogos() {
-
-    jogosModal.classList.remove(
-        "active"
-    );
-
-    clearInterval(
-        intervaloJogo
-    );
-
-    partidaAtiva = false;
-
-    alvo.style.display =
-        "none";
-}
-
-
-/* ABRIR NEON TARGET */
-
-function iniciarNeonTarget() {
-
-    neonGame.style.display =
-        "block";
-
-    pontos = 0;
-
-    tempo = 30;
-
-    pontosTexto.textContent =
-        pontos;
-
-    tempoTexto.textContent =
-        tempo;
-
-    inicioJogo.style.display =
-        "flex";
-
-    fimJogo.style.display =
-        "none";
-
-    alvo.style.display =
-        "none";
-}
-
-
-/* COMEÇAR PARTIDA */
-
-function comecarPartida() {
-
-    clearInterval(
-        intervaloJogo
-    );
-
-    pontos = 0;
-
-    tempo = 30;
-
-    partidaAtiva = true;
-
-    pontosTexto.textContent =
-        pontos;
-
-    tempoTexto.textContent =
-        tempo;
-
-    inicioJogo.style.display =
-        "none";
-
-    fimJogo.style.display =
-        "none";
-
-    alvo.style.display =
-        "block";
-
-    moverAlvo();
-
-
-    intervaloJogo =
-        setInterval(
-            function () {
-
-                tempo--;
-
-                tempoTexto.textContent =
-                    tempo;
-
-                if (tempo <= 0) {
-
-                    terminarPartida();
-
-                }
-
-            },
-            1000
-        );
-}
-
-
-/* ACERTAR ALVO */
-
-function acertarAlvo() {
-
-    if (!partidaAtiva) {
+    if (event.key !== "Enter") {
         return;
     }
 
-    pontos++;
+    const input =
+        document.getElementById("terminalInput");
 
-    pontosTexto.textContent =
-        pontos;
+    const command =
+        input.value.trim().toLowerCase();
 
-    moverAlvo();
+    const output =
+        document.getElementById("terminalOutput");
+
+    if (!command) {
+        return;
+    }
+
+    const line =
+        document.createElement("p");
+
+    line.innerHTML =
+        `&gt; ${escaparHTML(command)}`;
+
+    output.appendChild(line);
+
+    let response = "";
+
+    if (command === "help") {
+
+        response =
+            "Comandos: help, clear, about, jogos, status";
+
+    } else if (command === "about") {
+
+        response =
+            "PROGRAMACAO.exe — central de aprendizado de programação.";
+
+    } else if (command === "jogos") {
+
+        response =
+            "Módulo JOGOS: use o botão CRIAR JOGO para montar seu projeto.";
+
+    } else if (command === "status") {
+
+        response =
+            "SISTEMA ONLINE — TODOS OS MÓDULOS PRINCIPAIS OPERACIONAIS.";
+
+    } else if (command === "clear") {
+
+        output.innerHTML = "";
+        input.value = "";
+        return;
+
+    } else {
+
+        response =
+            `Comando "${escaparHTML(command)}" não encontrado. Digite help.`;
+    }
+
+    const responseLine =
+        document.createElement("p");
+
+    responseLine.textContent = response;
+
+    output.appendChild(responseLine);
+
+    output.scrollTop = output.scrollHeight;
+
+    input.value = "";
+}
+
+function escaparHTML(texto) {
+
+    return texto
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
-/* MOVER ALVO */
+/* ================================= */
+/* MÓDULOS FUTUROS */
+/* ================================= */
 
-function moverAlvo() {
+function moduloEmBreve(nome) {
 
-    const largura =
-        campoJogo.clientWidth;
+    const content =
+        document.getElementById("aulaContent");
 
-    const altura =
-        campoJogo.clientHeight;
+    content.innerHTML = `
+        <h2>${escaparHTML(nome)} <span>.exe</span></h2>
 
-    const tamanho =
-        55;
+        <p>
+            Este módulo ainda está sendo desenvolvido.
+        </p>
 
-    const x =
-        Math.random() *
-        (largura - tamanho);
+        <p>
+            O objetivo é transformar esta área em uma
+            ferramenta realmente funcional, assim como
+            o módulo JOGOS.
+        </p>
+    `;
 
-    const y =
-        Math.random() *
-        (altura - tamanho);
-
-    alvo.style.left =
-        x + "px";
-
-    alvo.style.top =
-        y + "px";
+    abrirModal("aulaModal");
 }
 
 
-/* TERMINAR PARTIDA */
+/* ================================= */
+/* JOGOS — CENTRAL DE CRIAÇÃO */
+/* ================================= */
 
-function terminarPartida() {
+let etapaAtual = 1;
 
-    partidaAtiva = false;
+const projeto = {
 
-    clearInterval(
-        intervaloJogo
-    );
+    dimensao: null,
 
-    alvo.style.display =
-        "none";
+    estilo: null,
 
-    pontuacaoFinal.textContent =
-        pontos;
+    personagem: "",
 
-    fimJogo.style.display =
-        "flex";
+    mecanicas: []
+
+};
+
+
+/* ABRIR CENTRAL */
+
+function abrirJogos() {
+
+    resetarCriador();
+
+    abrirModal("jogosModal");
+
 }
 
 
-/* =====================================================
-   FECHAR MODAIS CLICANDO FORA
-===================================================== */
+/* RESET */
 
-window.addEventListener(
-    "click",
-    function (event) {
+function resetarCriador() {
 
-        if (event.target === jogosModal) {
+    etapaAtual = 1;
 
-            fecharJogos();
+    projeto.dimensao = null;
+    projeto.estilo = null;
+    projeto.personagem = "";
+    projeto.mecanicas = [];
 
+    document
+        .querySelectorAll(".game-step")
+        .forEach(step => {
+
+            step.classList.remove("active");
+
+        });
+
+    document
+        .querySelector('.game-step[data-step="1"]')
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".choice-card")
+        .forEach(card => {
+
+            card.classList.remove("selected");
+
+        });
+
+
+    document
+        .querySelectorAll(".mechanic")
+        .forEach(button => {
+
+            button.classList.remove("selected");
+
+        });
+
+
+    const character =
+        document.getElementById("characterName");
+
+    const preview =
+        document.getElementById("characterPreview");
+
+    if (character) {
+        character.value = "";
+    }
+
+    if (preview) {
+        preview.textContent = "SEU PERSONAGEM";
+    }
+
+
+    document
+        .getElementById("generatedProject")
+        .classList.remove("active");
+
+
+    atualizarInterface();
+
+}
+
+
+/* ESCOLHER OPÇÃO */
+
+function selecionarEscolha(elemento, tipo, valor) {
+
+    const grupo =
+        elemento.parentElement.querySelectorAll(".choice-card");
+
+    grupo.forEach(card => {
+        card.classList.remove("selected");
+    });
+
+    elemento.classList.add("selected");
+
+    projeto[tipo] = valor;
+
+}
+
+
+/* MECÂNICAS */
+
+function alternarMecanica(elemento, mecanica) {
+
+    elemento.classList.toggle("selected");
+
+    if (elemento.classList.contains("selected")) {
+
+        if (!projeto.mecanicas.includes(mecanica)) {
+            projeto.mecanicas.push(mecanica);
         }
 
-        if (event.target === terminalModal) {
+    } else {
 
-            fecharTerminal();
+        projeto.mecanicas =
+            projeto.mecanicas.filter(
+                item => item !== mecanica
+            );
 
+    }
+
+}
+
+
+/* PERSONAGEM */
+
+const characterInput =
+    document.getElementById("characterName");
+
+if (characterInput) {
+
+    characterInput.addEventListener("input", () => {
+
+        const nome =
+            characterInput.value.trim();
+
+        document
+            .getElementById("characterPreview")
+            .textContent =
+            nome || "SEU PERSONAGEM";
+
+        projeto.personagem = nome;
+
+    });
+
+}
+
+
+/* PRÓXIMA ETAPA */
+
+function proximaEtapa() {
+
+    if (!validarEtapa()) {
+        return;
+    }
+
+    if (etapaAtual < 5) {
+
+        etapaAtual++;
+
+        mostrarEtapa(etapaAtual);
+
+    }
+
+}
+
+
+/* VOLTAR */
+
+function voltarEtapa() {
+
+    if (etapaAtual > 1) {
+
+        etapaAtual--;
+
+        mostrarEtapa(etapaAtual);
+
+    }
+
+}
+
+
+/* MOSTRAR ETAPA */
+
+function mostrarEtapa(numero) {
+
+    document
+        .querySelectorAll(".game-step")
+        .forEach(step => {
+
+            step.classList.remove("active");
+
+        });
+
+    const novaEtapa =
+        document.querySelector(
+            `.game-step[data-step="${numero}"]`
+        );
+
+    if (novaEtapa) {
+        novaEtapa.classList.add("active");
+    }
+
+
+    atualizarInterface();
+
+
+    if (numero === 5) {
+        montarResumo();
+    }
+
+}
+
+
+/* ATUALIZAR INTERFACE */
+
+function atualizarInterface() {
+
+    const porcentagem =
+        etapaAtual * 20;
+
+    document
+        .getElementById("stepText")
+        .textContent =
+        `ETAPA ${String(etapaAtual).padStart(2, "0")}`;
+
+    document
+        .getElementById("stepPercent")
+        .textContent =
+        `${porcentagem}%`;
+
+    document
+        .getElementById("progressFill")
+        .style.width =
+        `${porcentagem}%`;
+
+
+    const back =
+        document.getElementById("backButton");
+
+    const next =
+        document.getElementById("nextButton");
+
+
+    back.style.visibility =
+        etapaAtual === 1
+            ? "hidden"
+            : "visible";
+
+
+    if (etapaAtual === 5) {
+
+        next.style.display = "none";
+
+    } else {
+
+        next.style.display = "block";
+
+    }
+
+}
+
+
+/* VALIDAR */
+
+function validarEtapa() {
+
+    if (etapaAtual === 1) {
+
+        if (!projeto.dimensao) {
+
+            alert("Escolha 2D ou 3D para continuar.");
+
+            return false;
         }
 
     }
-);
+
+
+    if (etapaAtual === 2) {
+
+        if (!projeto.estilo) {
+
+            alert("Escolha um estilo de jogo para continuar.");
+
+            return false;
+        }
+
+    }
+
+
+    if (etapaAtual === 3) {
+
+        const nome =
+            document
+                .getElementById("characterName")
+                .value
+                .trim();
+
+        if (!nome) {
+
+            alert("Digite um nome para o personagem.");
+
+            document
+                .getElementById("characterName")
+                .focus();
+
+            return false;
+        }
+
+        projeto.personagem = nome;
+
+    }
+
+
+    if (etapaAtual === 4) {
+
+        if (projeto.mecanicas.length === 0) {
+
+            alert(
+                "Escolha pelo menos uma mecânica para continuar."
+            );
+
+            return false;
+        }
+
+    }
+
+    return true;
+}
+
+
+/* RESUMO */
+
+function montarResumo() {
+
+    const container =
+        document.getElementById("projectSummary");
+
+    const mecanicas =
+        projeto.mecanicas.length
+            ? projeto.mecanicas.join(", ")
+            : "Nenhuma";
+
+    container.innerHTML = `
+
+        <div class="summary-item">
+            <small>DIMENSÃO</small>
+            <strong>${escaparHTML(projeto.dimensao || "Não definida")}</strong>
+        </div>
+
+        <div class="summary-item">
+            <small>ESTILO</small>
+            <strong>${escaparHTML(projeto.estilo || "Não definido")}</strong>
+        </div>
+
+        <div class="summary-item">
+            <small>PERSONAGEM</small>
+            <strong>${escaparHTML(projeto.personagem || "Não definido")}</strong>
+        </div>
+
+        <div class="summary-item">
+            <small>MECÂNICAS</small>
+            <strong>${escaparHTML(mecanicas)}</strong>
+        </div>
+
+    `;
+}
+
+
+/* ================================= */
+/* GERAR PROJETO */
+/* ================================= */
+
+function gerarProjeto() {
+
+    if (!projeto.dimensao ||
+        !projeto.estilo ||
+        !projeto.personagem ||
+        projeto.mecanicas.length === 0) {
+
+        alert("Complete todas as etapas antes de gerar o projeto.");
+
+        return;
+    }
+
+
+    const codigo =
+        criarCodigoInicial();
+
+
+    document
+        .getElementById("generatedCode")
+        .textContent = codigo;
+
+
+    document
+        .getElementById("generatedSummary")
+        .innerHTML = `
+
+        <div class="generated-summary">
+
+            <div class="summary-item">
+                <small>DIMENSÃO</small>
+                <strong>${escaparHTML(projeto.dimensao)}</strong>
+            </div>
+
+            <div class="summary-item">
+                <small>ESTILO</small>
+                <strong>${escaparHTML(projeto.estilo)}</strong>
+            </div>
+
+            <div class="summary-item">
+                <small>PERSONAGEM</small>
+                <strong>${escaparHTML(projeto.personagem)}</strong>
+            </div>
+
+            <div class="summary-item">
+                <small>MECÂNICAS</small>
+                <strong>${escaparHTML(projeto.mecanicas.join(", "))}</strong>
+            </div>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("generatedProject")
+        .classList.add("active");
+
+
+    document
+        .getElementById("generatedProject")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+}
+
+
+/* ================================= */
+/* CÓDIGO INICIAL */
+/* ================================= */
+
+function criarCodigoInicial() {
+
+    const nome =
+        projeto.personagem
+            .replace(/[^a-zA-Z0-9À-ÿ ]/g, "")
+            .trim();
+
+    const nomeSeguro =
+        nome || "Jogador";
+
+    const dimensao =
+        projeto.dimensao;
+
+    const estilo =
+        projeto.estilo;
+
+    const mecanicas =
+        projeto.mecanicas
+            .map(item => `- ${item}`)
+            .join("\n");
+
+
+    return `<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>${nomeSeguro} - Meu Jogo</title>
+
+<style>
+
+body {
+    margin: 0;
+    background: #050505;
+    color: #00ff66;
+    font-family: monospace;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.game {
+    width: min(700px, 90%);
+    padding: 30px;
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 30px #003d1a;
+}
+
+h1 {
+    color: white;
+}
+
+.info {
+    line-height: 1.8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="game">
+
+<h1>${nomeSeguro}</h1>
+
+<div class="info">
+
+<p>Meu primeiro projeto de jogo!</p>
+
+<p>Dimensão: ${dimensao}</p>
+
+<p>Estilo: ${estilo}</p>
+
+<p>Mecânicas:</p>
+
+<pre>${mecanicas}</pre>
+
+</div>
+
+</div>
+
+
+<script>
+
+console.log("Meu primeiro jogo está iniciando...");
+
+const jogo = {
+
+    dimensao: "${dimensao}",
+
+    estilo: "${estilo}",
+
+    personagem: "${nomeSeguro}",
+
+    mecanicas: ${JSON.stringify(projeto.mecanicas)}
+
+};
+
+console.log(jogo);
+
+</script>
+
+</body>
+
+</html>`;
+}
+
+
+/* ================================= */
+/* COPIAR CÓDIGO */
+/* ================================= */
+
+function copiarCodigo() {
+
+    const codigo =
+        document
+            .getElementById("generatedCode")
+            .textContent;
+
+
+    navigator.clipboard
+        .writeText(codigo)
+        .then(() => {
+
+            const botao =
+                document.querySelector(
+                    ".code-header button"
+                );
+
+            const textoOriginal =
+                botao.textContent;
+
+            botao.textContent =
+                "✓ COPIADO!";
+
+            setTimeout(() => {
+
+                botao.textContent =
+                    textoOriginal;
+
+            }, 1800);
+
+        })
+        .catch(() => {
+
+            alert(
+                "Não foi possível copiar automaticamente. Selecione o código manualmente."
+            );
+
+        });
+
+}
+
+
+/* ================================= */
+/* INICIALIZAÇÃO */
+/* ================================= */
+
+atualizarInterface();
