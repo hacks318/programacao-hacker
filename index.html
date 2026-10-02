@@ -3,10 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-        content="Central de aprendizado sobre programação, tecnologia e desenvolvimento.">
+        content="PROGRAMACAO.exe - Central de programação, tecnologia e desenvolvimento.">
 
     <title>PROGRAMACAO.exe</title>
 
@@ -15,11 +17,15 @@
 
 <body>
 
-    <!-- FUNDO MATRIX -->
+    <!-- MATRIX -->
     <div id="matrix"></div>
     <div class="overlay"></div>
 
-    <!-- NAVEGAÇÃO -->
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
     <header class="navbar">
 
         <div class="logo">
@@ -40,52 +46,85 @@
     </header>
 
 
-    <!-- INÍCIO -->
+    <!-- =========================
+         CONTEÚDO PRINCIPAL
+    ========================== -->
+
     <main id="inicio">
+
+
+        <!-- =========================
+             HERO
+        ========================== -->
 
         <section class="hero">
 
             <div class="terminal">
 
                 <div class="terminal-top">
+
                     <span>●</span>
                     <span>●</span>
                     <span>●</span>
 
-                    <strong>system_terminal</strong>
+                    <strong>
+                        system_terminal
+                    </strong>
+
                 </div>
 
-                <div class="terminal-body" id="terminalText"></div>
+                <div
+                    class="terminal-body"
+                    id="terminalText">
+                </div>
 
             </div>
+
 
             <h1>
                 APRENDA<br>
                 <span>PROGRAMAÇÃO</span>
             </h1>
 
+
             <p>
                 Entenda como a programação funciona,
-                descubra o que você pode criar e comece
-                sua jornada no desenvolvimento.
+                descubra o que você pode criar e
+                comece sua jornada no desenvolvimento.
             </p>
 
-            <a href="#aprendizado" class="hero-button">
+
+            <a
+                href="#aprendizado"
+                class="hero-button">
+
                 INICIAR APRENDIZADO →
+
             </a>
 
         </section>
 
 
-        <!-- APRENDIZADO -->
-        <section id="aprendizado" class="section">
+
+        <!-- =========================
+             APRENDIZADO
+        ========================== -->
+
+        <section
+            id="aprendizado"
+            class="section">
 
             <div class="section-title">
+
                 <span>// 01</span>
-                <h2>CENTRAL DE APRENDIZADO</h2>
+
+                <h2>
+                    CENTRAL DE APRENDIZADO
+                </h2>
+
             </div>
 
-            <!-- PESQUISA -->
+
             <div class="search-box">
 
                 <span>⌕</span>
@@ -93,13 +132,17 @@
                 <input
                     type="text"
                     id="searchInput"
-                    placeholder="Pesquisar assunto..."
-                >
+                    placeholder="Pesquisar assunto...">
 
             </div>
 
 
-            <div class="cards" id="learningCards">
+            <div
+                class="cards"
+                id="learningCards">
+
+
+                <!-- CARD 01 -->
 
                 <article class="card">
 
@@ -112,17 +155,24 @@
                     </h3>
 
                     <p>
-                        Entenda lógica, variáveis, condições,
-                        repetições, funções e como um programa
+                        Entenda lógica, variáveis,
+                        condições, repetições,
+                        funções e como um programa
                         transforma instruções em ações.
                     </p>
 
-                    <button onclick="abrirConteudo('programacao')">
+                    <button
+                        onclick="abrirConteudo('programacao')">
+
                         ACESSAR →
+
                     </button>
 
                 </article>
 
+
+
+                <!-- CARD 02 -->
 
                 <article class="card">
 
@@ -135,17 +185,24 @@
                     </h3>
 
                     <p>
-                        Descubra como programação pode ser usada
-                        para criar jogos, sites, aplicativos,
-                        ferramentas, automações e muito mais.
+                        Descubra como programação pode
+                        ser usada para criar jogos,
+                        sites, aplicativos, ferramentas,
+                        automações e muito mais.
                     </p>
 
-                    <button onclick="abrirConteudo('criacao')">
+                    <button
+                        onclick="abrirConteudo('criacao')">
+
                         ACESSAR →
+
                     </button>
 
                 </article>
 
+
+
+                <!-- CARD 03 -->
 
                 <article class="card">
 
@@ -158,13 +215,17 @@
                     </h3>
 
                     <p>
-                        Um caminho para quem nunca programou:
-                        escolha de linguagem, fundamentos,
-                        prática e primeiros projetos.
+                        Um caminho para quem nunca
+                        programou: escolha de linguagem,
+                        fundamentos, prática e
+                        primeiros projetos.
                     </p>
 
-                    <button onclick="abrirConteudo('comecar')">
+                    <button
+                        onclick="abrirConteudo('comecar')">
+
                         ACESSAR →
+
                     </button>
 
                 </article>
@@ -172,11 +233,18 @@
             </div>
 
 
-            <!-- CONTEÚDO -->
-            <div id="conteudo" class="content-panel">
+            <!-- CONTEÚDO DOS CARDS -->
 
-                <button class="close-content" onclick="fecharConteudo()">
+            <div
+                id="conteudo"
+                class="content-panel">
+
+                <button
+                    class="close-content"
+                    onclick="fecharConteudo()">
+
                     ← VOLTAR
+
                 </button>
 
                 <div id="contentText"></div>
@@ -186,68 +254,215 @@
         </section>
 
 
-        <!-- PROJETOS -->
-        <section id="projetos" class="section">
+
+        <!-- =========================
+             PROJETOS
+        ========================== -->
+
+        <section
+            id="projetos"
+            class="section">
+
 
             <div class="section-title">
+
                 <span>// 02</span>
-                <h2>O QUE VOCÊ PODE CRIAR</h2>
+
+                <h2>
+                    O QUE VOCÊ PODE CRIAR
+                </h2>
+
             </div>
+
+
 
             <div class="project-grid">
 
-                <div class="project">
-                    <div class="project-icon">🎮</div>
-                    <h3>JOGOS</h3>
+
+                <!-- =================
+                     JOGOS
+                ================== -->
+
+                <div
+                    class="project project-clickable"
+                    onclick="abrirJogos()">
+
+                    <div class="project-icon">
+                        🎮
+                    </div>
+
+                    <h3>
+                        JOGOS
+                    </h3>
+
                     <p>
-                        Crie jogos 2D, 3D, sistemas de pontuação,
-                        personagens, mapas e mecânicas.
+                        Crie jogos 2D, 3D, sistemas
+                        de pontuação, personagens,
+                        mapas e mecânicas.
                     </p>
+
+                    <button
+                        onclick="event.stopPropagation(); abrirJogos()">
+
+                        ABRIR JOGOS →
+
+                    </button>
+
                 </div>
 
-                <div class="project">
-                    <div class="project-icon">🌐</div>
-                    <h3>SITES</h3>
-                    <p>
-                        Desenvolva páginas, portais,
-                        plataformas e aplicações web.
-                    </p>
-                </div>
+
+
+                <!-- =================
+                     SITES
+                ================== -->
 
                 <div class="project">
-                    <div class="project-icon">📱</div>
-                    <h3>APLICATIVOS</h3>
+
+                    <div class="project-icon">
+                        🌐
+                    </div>
+
+                    <h3>
+                        SITES
+                    </h3>
+
                     <p>
-                        Crie aplicativos para diferentes
-                        dispositivos e necessidades.
+                        Desenvolva páginas,
+                        portais, plataformas
+                        e aplicações web.
                     </p>
+
+                    <button
+                        onclick="mostrarEmBreve('SITES')">
+
+                        EM BREVE
+
+                    </button>
+
                 </div>
 
-                <div class="project">
-                    <div class="project-icon">🤖</div>
-                    <h3>INTELIGÊNCIA ARTIFICIAL</h3>
-                    <p>
-                        Desenvolva aplicações que trabalham
-                        com dados, modelos e automação.
-                    </p>
-                </div>
+
+
+                <!-- =================
+                     APLICATIVOS
+                ================== -->
 
                 <div class="project">
-                    <div class="project-icon">⚙️</div>
-                    <h3>AUTOMAÇÃO</h3>
+
+                    <div class="project-icon">
+                        📱
+                    </div>
+
+                    <h3>
+                        APLICATIVOS
+                    </h3>
+
                     <p>
-                        Faça programas executarem tarefas
-                        repetitivas automaticamente.
+                        Crie aplicativos para
+                        diferentes dispositivos
+                        e necessidades.
                     </p>
+
+                    <button
+                        onclick="mostrarEmBreve('APLICATIVOS')">
+
+                        EM BREVE
+
+                    </button>
+
                 </div>
 
+
+
+                <!-- =================
+                     IA
+                ================== -->
+
                 <div class="project">
-                    <div class="project-icon">🛠️</div>
-                    <h3>FERRAMENTAS</h3>
+
+                    <div class="project-icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        INTELIGÊNCIA ARTIFICIAL
+                    </h3>
+
                     <p>
-                        Transforme suas ideias em calculadoras,
-                        organizadores, sistemas e ferramentas.
+                        Desenvolva aplicações
+                        que trabalham com dados,
+                        modelos e automação.
                     </p>
+
+                    <button
+                        onclick="mostrarEmBreve('INTELIGÊNCIA ARTIFICIAL')">
+
+                        EM BREVE
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================
+                     AUTOMAÇÃO
+                ================== -->
+
+                <div class="project">
+
+                    <div class="project-icon">
+                        ⚙️
+                    </div>
+
+                    <h3>
+                        AUTOMAÇÃO
+                    </h3>
+
+                    <p>
+                        Faça programas executarem
+                        tarefas repetitivas
+                        automaticamente.
+                    </p>
+
+                    <button
+                        onclick="mostrarEmBreve('AUTOMAÇÃO')">
+
+                        EM BREVE
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================
+                     FERRAMENTAS
+                ================== -->
+
+                <div class="project">
+
+                    <div class="project-icon">
+                        🛠️
+                    </div>
+
+                    <h3>
+                        FERRAMENTAS
+                    </h3>
+
+                    <p>
+                        Transforme suas ideias
+                        em calculadoras, sistemas
+                        e ferramentas.
+                    </p>
+
+                    <button
+                        onclick="mostrarEmBreve('FERRAMENTAS')">
+
+                        EM BREVE
+
+                    </button>
+
                 </div>
 
             </div>
@@ -255,42 +470,80 @@
         </section>
 
 
-        <!-- SOBRE -->
-        <section id="sobre" class="section about">
+
+        <!-- =========================
+             SOBRE
+        ========================== -->
+
+        <section
+            id="sobre"
+            class="section about">
 
             <div class="section-title">
+
                 <span>// 03</span>
-                <h2>SOBRE O PROJETO</h2>
+
+                <h2>
+                    SOBRE O PROJETO
+                </h2>
+
             </div>
 
+
             <p>
-                PROGRAMACAO.exe é uma central criada para
-                ajudar pessoas a entenderem programação de
-                maneira simples e prática.
+                PROGRAMACAO.exe é uma central
+                criada para ajudar pessoas a
+                entenderem programação de maneira
+                simples e prática.
             </p>
 
             <p>
-                O objetivo é mostrar que programação não é
-                apenas escrever código. É aprender a pensar,
-                resolver problemas e transformar ideias em
-                projetos.
+                O objetivo é mostrar que programação
+                não é apenas escrever código.
+                É aprender a pensar, resolver
+                problemas e transformar ideias
+                em projetos.
             </p>
+
 
             <div class="status">
 
                 <div>
-                    <span>STATUS</span>
-                    <strong>ONLINE</strong>
+
+                    <span>
+                        STATUS
+                    </span>
+
+                    <strong>
+                        ONLINE
+                    </strong>
+
                 </div>
 
-                <div>
-                    <span>SISTEMA</span>
-                    <strong>OPERACIONAL</strong>
-                </div>
 
                 <div>
-                    <span>VERSÃO</span>
-                    <strong>1.0</strong>
+
+                    <span>
+                        SISTEMA
+                    </span>
+
+                    <strong>
+                        OPERACIONAL
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        VERSÃO
+                    </span>
+
+                    <strong>
+                        2.0
+                    </strong>
+
                 </div>
 
             </div>
@@ -300,7 +553,11 @@
     </main>
 
 
-    <!-- RODAPÉ -->
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
     <footer>
 
         <div class="footer-logo">
@@ -318,37 +575,70 @@
     </footer>
 
 
-    <!-- TERMINAL MODAL -->
-    <div id="terminalModal" class="modal">
+
+    <!-- =========================
+         TERMINAL
+    ========================== -->
+
+    <div
+        id="terminalModal"
+        class="modal">
 
         <div class="modal-terminal">
 
             <div class="modal-header">
-                <span>PROGRAMACAO_TERMINAL</span>
 
-                <button onclick="fecharTerminal()">
+                <span>
+                    PROGRAMACAO_TERMINAL
+                </span>
+
+                <button
+                    onclick="fecharTerminal()">
+
                     X
+
                 </button>
+
             </div>
 
-            <div class="terminal-screen" id="terminalScreen">
 
-                <p>&gt; Inicializando sistema...</p>
-                <p>&gt; Carregando módulos...</p>
-                <p>&gt; Verificando conexão...</p>
-                <p>&gt; Sistema operacional.</p>
+            <div
+                class="terminal-screen"
+                id="terminalScreen">
+
+                <p>
+                    &gt; Inicializando sistema...
+                </p>
+
+                <p>
+                    &gt; Carregando módulos...
+                </p>
+
+                <p>
+                    &gt; Verificando conexão...
+                </p>
+
+                <p>
+                    &gt; Sistema operacional.
+                </p>
+
                 <br>
-                <p>&gt; Digite um comando abaixo.</p>
+
+                <p>
+                    &gt; Digite um comando abaixo.
+                </p>
+
 
                 <div class="terminal-input">
 
-                    <span>&gt;</span>
+                    <span>
+                        &gt;
+                    </span>
 
                     <input
                         id="commandInput"
                         type="text"
-                        placeholder="digite um comando..."
-                    >
+                        placeholder="digite um comando...">
 
                 </div>
 
@@ -359,7 +649,199 @@
     </div>
 
 
+
+    <!-- =========================
+         JOGOS
+    ========================== -->
+
+    <div
+        id="jogosModal"
+        class="modal">
+
+        <div class="jogos-painel">
+
+
+            <div class="modal-header">
+
+                <span>
+                    🎮 JOGOS.exe
+                </span>
+
+                <button
+                    onclick="fecharJogos()">
+
+                    X
+
+                </button>
+
+            </div>
+
+
+            <div class="jogos-conteudo">
+
+                <h2>
+                    GAME CENTER
+                </h2>
+
+                <p class="jogos-status">
+                    &gt; sistema de jogos online
+                </p>
+
+
+
+                <!-- JOGO -->
+
+                <div class="jogo-card">
+
+                    <div class="jogo-icon">
+                        🎯
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            NEON TARGET
+                        </h3>
+
+                        <p>
+                            Acerte o alvo verde
+                            o máximo de vezes
+                            possível antes
+                            que o tempo termine.
+                        </p>
+
+                        <button
+                            onclick="iniciarNeonTarget()">
+
+                            JOGAR →
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ÁREA DO JOGO -->
+
+                <div
+                    id="neonGame"
+                    class="neon-game">
+
+
+                    <div class="game-top">
+
+                        <span>
+                            PONTOS:
+                            <strong id="pontos">
+                                0
+                            </strong>
+                        </span>
+
+
+                        <span>
+                            TEMPO:
+                            <strong id="tempo">
+                                30
+                            </strong>
+                        </span>
+
+                    </div>
+
+
+
+                    <div
+                        id="campoJogo"
+                        class="campo-jogo">
+
+
+                        <!-- ALVO -->
+
+                        <button
+                            id="alvo"
+                            class="alvo"
+                            onclick="acertarAlvo()">
+
+                            +
+
+                        </button>
+
+
+
+                        <!-- INÍCIO -->
+
+                        <div
+                            id="inicioJogo">
+
+                            <h3>
+                                NEON TARGET
+                            </h3>
+
+                            <p>
+                                Clique no alvo verde.
+                            </p>
+
+                            <button
+                                onclick="comecarPartida()">
+
+                                COMEÇAR
+
+                            </button>
+
+                        </div>
+
+
+
+                        <!-- FIM -->
+
+                        <div
+                            id="fimJogo"
+                            class="fim-jogo">
+
+                            <h3>
+                                FIM DE JOGO
+                            </h3>
+
+                            <p>
+                                Sua pontuação:
+                            </p>
+
+                            <strong
+                                id="pontuacaoFinal">
+
+                                0
+
+                            </strong>
+
+                            <button
+                                onclick="comecarPartida()">
+
+                                JOGAR NOVAMENTE
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
     <script src="script.js"></script>
 
 </body>
-        </html>
+
+            </html>
