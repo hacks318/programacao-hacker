@@ -11,11 +11,12 @@
 
 <body>
 
-    <!-- FUNDO MATRIX -->
+    <!-- MATRIX -->
     <canvas id="matrix"></canvas>
 
-    <!-- NAVEGAÇÃO -->
+    <!-- NAVBAR -->
     <header class="navbar">
+
         <div class="logo">&lt;PROGRAMACAO.exe/&gt;</div>
 
         <nav>
@@ -28,589 +29,384 @@
         <button class="terminal-btn" onclick="abrirTerminal()">
             TERMINAL
         </button>
+
     </header>
 
 
-    <!-- INÍCIO -->
-    <section id="inicio" class="hero">
+    <!-- HERO -->
+    <main>
 
-        <div class="terminal-box">
-            <div class="terminal-top">
-                <span></span>
-                <span></span>
-                <span></span>
-                <b>PROGRAMACAO.exe</b>
+        <section id="inicio" class="hero">
+
+            <div class="terminal-mini">
+                <span class="terminal-green">user@programacao</span>
+                <span>:</span>
+                <span class="terminal-blue">~</span>
+                <span>$</span>
+                <span id="typing"></span>
+                <span class="cursor">_</span>
             </div>
 
-            <div class="terminal-content">
-                <p>&gt; iniciando sistema...</p>
-                <p>&gt; carregando módulos...</p>
-                <p>&gt; sistema online<span class="cursor">_</span></p>
+            <p class="tag">SISTEMA DE APRENDIZADO ONLINE</p>
+
+            <h1>
+                APRENDA<br>
+                <span>PROGRAMAÇÃO</span>
+            </h1>
+
+            <p class="hero-description">
+                Aprenda programação através de cursos interativos,
+                desafios e projetos.
+            </p>
+
+            <a href="#projetos" class="main-button">
+                INICIAR APRENDIZADO
+            </a>
+
+        </section>
+
+
+        <!-- APRENDER -->
+        <section id="aprender" class="section">
+
+            <div class="section-title">
+                <span>// 01</span>
+                <h2>APRENDER</h2>
             </div>
-        </div>
 
-        <h1>APRENDA <span>PROGRAMAÇÃO</span></h1>
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Pesquisar assunto..."
+                    oninput="pesquisarCursos()"
+                >
+            </div>
 
-        <p class="hero-description">
-            Aprenda programação, crie projetos e transforme suas ideias em código.
-        </p>
+            <div class="learning-grid">
 
-        <a href="#projetos" class="main-button">
-            EXPLORAR PROJETOS
-        </a>
+                <article class="info-card searchable">
+                    <div class="card-icon">01</div>
+                    <h3>COMO FUNCIONA A PROGRAMAÇÃO</h3>
+                    <p>
+                        Entenda lógica, algoritmos, variáveis,
+                        condições, repetições e funções.
+                    </p>
+                    <button onclick="abrirAulaGeral()">
+                        COMEÇAR
+                    </button>
+                </article>
 
-    </section>
+                <article class="info-card searchable">
+                    <div class="card-icon">02</div>
+                    <h3>COMO PENSAR COMO PROGRAMADOR</h3>
+                    <p>
+                        Aprenda a transformar problemas grandes
+                        em pequenos passos.
+                    </p>
+                    <button onclick="abrirAulaPensamento()">
+                        COMEÇAR
+                    </button>
+                </article>
 
+                <article class="info-card searchable">
+                    <div class="card-icon">03</div>
+                    <h3>DO ZERO AO PRIMEIRO PROJETO</h3>
+                    <p>
+                        Aprenda a planejar, construir e testar
+                        seus próprios projetos.
+                    </p>
+                    <button onclick="abrirAulaProjeto()">
+                        COMEÇAR
+                    </button>
+                </article>
 
-    <!-- APRENDER -->
-    <section id="aprender" class="section">
+            </div>
 
-        <div class="section-title">
-            <p>// SISTEMA DE APRENDIZADO</p>
-            <h2>APRENDA DO <span>ZERO</span></h2>
-        </div>
-
-        <div class="search-box">
-            <span>⌕</span>
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Pesquisar assunto..."
-                oninput="pesquisarAulas()"
-            >
-        </div>
-
-        <div class="learning-grid" id="learningGrid">
-
-            <article class="learning-card">
-                <span class="card-number">01</span>
-                <h3>COMO FUNCIONA A PROGRAMAÇÃO</h3>
-                <p>
-                    Entenda como computadores interpretam comandos,
-                    lógica, variáveis, funções e algoritmos.
-                </p>
-                <button onclick="mostrarAula('programacao')">
-                    APRENDER →
-                </button>
-            </article>
-
-            <article class="learning-card">
-                <span class="card-number">02</span>
-                <h3>COISAS QUE VOCÊ PODE CRIAR</h3>
-                <p>
-                    Sites, jogos, aplicativos, ferramentas,
-                    inteligências artificiais e muito mais.
-                </p>
-                <button onclick="mostrarAula('criacao')">
-                    VER IDEIAS →
-                </button>
-            </article>
-
-            <article class="learning-card">
-                <span class="card-number">03</span>
-                <h3>COMO COMEÇAR DO ZERO</h3>
-                <p>
-                    Descubra uma sequência simples para começar
-                    a programar mesmo sem experiência.
-                </p>
-                <button onclick="mostrarAula('comecar')">
-                    COMEÇAR →
-                </button>
-            </article>
-
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- PROJETOS -->
-    <section id="projetos" class="section projects-section">
+        <!-- PROJETOS / CURSOS -->
+        <section id="projetos" class="section">
 
-        <div class="section-title">
-            <p>// MÓDULOS DISPONÍVEIS</p>
-            <h2>PROJETOS <span>EXPERIMENTAIS</span></h2>
-        </div>
+            <div class="section-title">
+                <span>// 02</span>
+                <h2>CURSOS DE PROGRAMAÇÃO</h2>
+            </div>
 
-        <div class="projects-grid">
+            <p class="section-description">
+                Escolha uma área e entre na escola de programação.
+            </p>
 
-            <!-- JOGOS -->
-            <article class="project-card jogos-card">
 
-                <div class="project-icon">🎮</div>
+            <div class="projects-grid">
 
-                <div class="project-info">
+                <!-- JOGOS -->
+                <article class="project-card searchable">
+
+                    <div class="project-number">01</div>
+
+                    <div class="project-icon">🎮</div>
+
                     <h3>JOGOS</h3>
 
                     <p>
-                        Aprenda a criar jogos e monte seu próprio
-                        projeto passo a passo.
+                        Aprenda como jogos são planejados,
+                        criados e programados.
                     </p>
 
-                    <button onclick="abrirJogos()">
-                        CRIAR JOGO →
+                    <div class="course-info">
+                        <span>6 ETAPAS</span>
+                        <span>INICIANTE</span>
+                    </div>
+
+                    <button onclick="abrirCurso('jogos')">
+                        ENTRAR NO CURSO
                     </button>
-                </div>
 
-            </article>
+                </article>
 
 
-            <!-- SITES -->
-            <article class="project-card">
+                <!-- SITES -->
+                <article class="project-card searchable">
 
-                <div class="project-icon">🌐</div>
+                    <div class="project-number">02</div>
 
-                <div class="project-info">
+                    <div class="project-icon">🌐</div>
+
                     <h3>SITES</h3>
 
                     <p>
-                        Aprenda HTML, CSS e JavaScript criando
-                        páginas reais.
+                        Aprenda HTML, CSS, JavaScript,
+                        páginas e interfaces.
                     </p>
 
-                    <button onclick="moduloEmBreve('SITES')">
-                        ACESSAR →
+                    <div class="course-info">
+                        <span>6 ETAPAS</span>
+                        <span>INICIANTE</span>
+                    </div>
+
+                    <button onclick="abrirCurso('sites')">
+                        ENTRAR NO CURSO
                     </button>
-                </div>
 
-            </article>
+                </article>
 
 
-            <!-- APLICATIVOS -->
-            <article class="project-card">
+                <!-- APPS -->
+                <article class="project-card searchable">
 
-                <div class="project-icon">📱</div>
+                    <div class="project-number">03</div>
 
-                <div class="project-info">
+                    <div class="project-icon">📱</div>
+
                     <h3>APLICATIVOS</h3>
 
                     <p>
-                        Conheça os conceitos usados para criar
-                        aplicativos.
+                        Descubra como aplicativos são
+                        planejados e desenvolvidos.
                     </p>
 
-                    <button onclick="moduloEmBreve('APLICATIVOS')">
-                        ACESSAR →
+                    <div class="course-info">
+                        <span>6 ETAPAS</span>
+                        <span>INICIANTE</span>
+                    </div>
+
+                    <button onclick="abrirCurso('apps')">
+                        ENTRAR NO CURSO
                     </button>
-                </div>
 
-            </article>
+                </article>
 
 
-            <!-- IA -->
-            <article class="project-card">
+                <!-- IA -->
+                <article class="project-card searchable">
 
-                <div class="project-icon">🤖</div>
+                    <div class="project-number">04</div>
 
-                <div class="project-info">
+                    <div class="project-icon">🤖</div>
+
                     <h3>INTELIGÊNCIA ARTIFICIAL</h3>
 
                     <p>
-                        Aprenda conceitos de IA e experimente
-                        ferramentas inteligentes.
+                        Aprenda os conceitos básicos por trás
+                        da inteligência artificial.
                     </p>
 
-                    <button onclick="moduloEmBreve('INTELIGÊNCIA ARTIFICIAL')">
-                        ACESSAR →
+                    <div class="course-info">
+                        <span>6 ETAPAS</span>
+                        <span>INICIANTE</span>
+                    </div>
+
+                    <button onclick="abrirCurso('ia')">
+                        ENTRAR NO CURSO
                     </button>
-                </div>
 
-            </article>
+                </article>
 
 
-            <!-- AUTOMAÇÃO -->
-            <article class="project-card">
+                <!-- AUTOMAÇÃO -->
+                <article class="project-card searchable">
 
-                <div class="project-icon">⚙️</div>
+                    <div class="project-number">05</div>
 
-                <div class="project-info">
+                    <div class="project-icon">⚙️</div>
+
                     <h3>AUTOMAÇÃO</h3>
 
                     <p>
-                        Entenda como programas podem executar
-                        tarefas automaticamente.
+                        Aprenda lógica de automação,
+                        eventos e tarefas repetitivas.
                     </p>
 
-                    <button onclick="moduloEmBreve('AUTOMAÇÃO')">
-                        ACESSAR →
+                    <div class="course-info">
+                        <span>6 ETAPAS</span>
+                        <span>INICIANTE</span>
+                    </div>
+
+                    <button onclick="abrirCurso('automacao')">
+                        ENTRAR NO CURSO
                     </button>
-                </div>
 
-            </article>
+                </article>
 
 
-            <!-- FERRAMENTAS -->
-            <article class="project-card">
+                <!-- FERRAMENTAS -->
+                <article class="project-card searchable">
 
-                <div class="project-icon">🛠️</div>
+                    <div class="project-number">06</div>
 
-                <div class="project-info">
+                    <div class="project-icon">🛠️</div>
+
                     <h3>FERRAMENTAS</h3>
 
                     <p>
-                        Utilize ferramentas úteis para programação
-                        diretamente no navegador.
+                        Aprenda a pensar e planejar ferramentas
+                        úteis para outras pessoas.
                     </p>
 
-                    <button onclick="moduloEmBreve('FERRAMENTAS')">
-                        ACESSAR →
+                    <div class="course-info">
+                        <span>6 ETAPAS</span>
+                        <span>INICIANTE</span>
+                    </div>
+
+                    <button onclick="abrirCurso('ferramentas')">
+                        ENTRAR NO CURSO
                     </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- SOBRE -->
+        <section id="sobre" class="section about">
+
+            <div class="section-title">
+                <span>// 03</span>
+                <h2>SOBRE O SISTEMA</h2>
+            </div>
+
+            <div class="about-box">
+
+                <div>
+                    <span class="terminal-green">SYSTEM_STATUS</span>
+
+                    <h2>PROGRAMACAO.exe</h2>
+
+                    <p>
+                        Uma escola de programação com visual
+                        inspirado em terminais e sistemas hacker.
+                    </p>
+
+                    <p>
+                        O objetivo é ensinar programação através
+                        de explicações, desafios e projetos.
+                    </p>
                 </div>
 
-            </article>
+                <div class="system-status">
+                    <p>● SISTEMA ONLINE</p>
+                    <p>● CURSOS DISPONÍVEIS</p>
+                    <p>● MODO APRENDIZADO</p>
+                    <p>● PROGRESSO LOCAL</p>
+                </div>
 
-        </div>
+            </div>
 
-    </section>
+        </section>
 
-
-    <!-- SOBRE -->
-    <section id="sobre" class="section about">
-
-        <div class="section-title">
-            <p>// SOBRE O SISTEMA</p>
-            <h2>PROGRAMACAO<span>.exe</span></h2>
-        </div>
-
-        <div class="about-box">
-
-            <p>
-                O PROGRAMACAO.exe é um projeto criado para ajudar
-                iniciantes a aprender programação de maneira prática.
-            </p>
-
-            <p>
-                A ideia é transformar conceitos de programação em
-                experiências interativas diretamente no navegador.
-            </p>
-
-        </div>
-
-    </section>
+    </main>
 
 
-    <!-- RODAPÉ -->
+    <!-- FOOTER -->
     <footer>
+
+        <div>
+            &lt;PROGRAMACAO.exe/&gt;
+        </div>
+
         <p>
-            &lt;PROGRAMACAO.exe/&gt; — SISTEMA ONLINE
+            APRENDA • CRIE • PROGRAME
         </p>
+
     </footer>
 
 
-    <!-- =============================== -->
-    <!-- MODAL: AULAS -->
-    <!-- =============================== -->
+    <!-- MODAL DO CURSO -->
+    <div id="courseModal" class="modal">
 
-    <div id="aulaModal" class="modal">
+        <div class="course-window">
 
-        <div class="modal-box small-modal">
-
-            <button class="close-modal" onclick="fecharModal('aulaModal')">
+            <button class="close-button" onclick="fecharCurso()">
                 ×
             </button>
 
-            <div id="aulaContent"></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =============================== -->
-    <!-- MODAL: JOGOS -->
-    <!-- =============================== -->
-
-    <div id="jogosModal" class="modal">
-
-        <div class="modal-box game-builder">
-
-            <button class="close-modal" onclick="fecharModal('jogosModal')">
-                ×
-            </button>
-
-            <div class="builder-header">
+            <div class="course-header">
 
                 <div>
-                    <p class="system-label">// JOGOS.exe</p>
-
-                    <h2>
-                        CENTRAL DE CRIAÇÃO
-                        <span>DE JOGOS</span>
-                    </h2>
-
-                    <p>
-                        Aprenda e monte seu primeiro projeto passo a passo.
-                    </p>
+                    <span id="courseCategory">CURSO</span>
+                    <h2 id="courseTitle">CURSO</h2>
                 </div>
 
-            </div>
+                <div class="course-progress-box">
 
+                    <span id="courseStepText">
+                        ETAPA 1/6
+                    </span>
 
-            <!-- PROGRESSO -->
-
-            <div class="progress-area">
-
-                <div class="progress-text">
-                    <span id="stepText">ETAPA 01</span>
-                    <span id="stepPercent">20%</span>
-                </div>
-
-                <div class="progress-bar">
-                    <div id="progressFill"></div>
-                </div>
-
-            </div>
-
-
-            <!-- ETAPA 1 -->
-
-            <div class="game-step active" data-step="1">
-
-                <div class="step-number">01</div>
-
-                <h3>ESCOLHA A DIMENSÃO</h3>
-
-                <p>
-                    Primeiro você precisa decidir como será
-                    a estrutura visual do seu jogo.
-                </p>
-
-                <div class="choice-grid">
-
-                    <button
-                        class="choice-card"
-                        onclick="selecionarEscolha(this, 'dimensao', '2D')"
-                    >
-                        <strong>2D</strong>
-                        <span>Jogo em duas dimensões</span>
-                    </button>
-
-                    <button
-                        class="choice-card"
-                        onclick="selecionarEscolha(this, 'dimensao', '3D')"
-                    >
-                        <strong>3D</strong>
-                        <span>Jogo em três dimensões</span>
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- ETAPA 2 -->
-
-            <div class="game-step" data-step="2">
-
-                <div class="step-number">02</div>
-
-                <h3>ESCOLHA O ESTILO</h3>
-
-                <p>
-                    O gênero define a ideia principal do seu jogo.
-                </p>
-
-                <div class="choice-grid three">
-
-                    <button
-                        class="choice-card"
-                        onclick="selecionarEscolha(this, 'estilo', 'PLATAFORMA')"
-                    >
-                        <strong>🕹️ PLATAFORMA</strong>
-                        <span>Pular, correr e superar obstáculos.</span>
-                    </button>
-
-                    <button
-                        class="choice-card"
-                        onclick="selecionarEscolha(this, 'estilo', 'AVENTURA')"
-                    >
-                        <strong>🗺️ AVENTURA</strong>
-                        <span>Explorar mapas e descobrir lugares.</span>
-                    </button>
-
-                    <button
-                        class="choice-card"
-                        onclick="selecionarEscolha(this, 'estilo', 'SOBREVIVÊNCIA')"
-                    >
-                        <strong>⚔️ SOBREVIVÊNCIA</strong>
-                        <span>Coletar recursos e sobreviver.</span>
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- ETAPA 3 -->
-
-            <div class="game-step" data-step="3">
-
-                <div class="step-number">03</div>
-
-                <h3>DEFINA O PERSONAGEM</h3>
-
-                <p>
-                    Dê uma identidade ao personagem principal.
-                </p>
-
-                <input
-                    type="text"
-                    id="characterName"
-                    class="game-input"
-                    placeholder="Digite o nome do personagem..."
-                    maxlength="30"
-                >
-
-                <div class="character-preview">
-                    <div class="pixel-character">🧑‍💻</div>
-
-                    <div>
-                        <strong id="characterPreview">
-                            SEU PERSONAGEM
-                        </strong>
-
-                        <p>
-                            Este será o personagem principal.
-                        </p>
+                    <div class="progress-bar">
+                        <div id="courseProgress"></div>
                     </div>
-                </div>
-
-            </div>
-
-
-            <!-- ETAPA 4 -->
-
-            <div class="game-step" data-step="4">
-
-                <div class="step-number">04</div>
-
-                <h3>ESCOLHA AS MECÂNICAS</h3>
-
-                <p>
-                    Mecânicas são as ações que o jogador poderá realizar.
-                </p>
-
-                <div class="mechanics-grid">
-
-                    <button
-                        class="mechanic"
-                        onclick="alternarMecanica(this, 'PULAR')"
-                    >
-                        🦘 PULAR
-                    </button>
-
-                    <button
-                        class="mechanic"
-                        onclick="alternarMecanica(this, 'COLETAR')"
-                    >
-                        💎 COLETAR
-                    </button>
-
-                    <button
-                        class="mechanic"
-                        onclick="alternarMecanica(this, 'INIMIGOS')"
-                    >
-                        👾 INIMIGOS
-                    </button>
-
-                    <button
-                        class="mechanic"
-                        onclick="alternarMecanica(this, 'VIDA')"
-                    >
-                        ❤️ VIDA
-                    </button>
-
-                    <button
-                        class="mechanic"
-                        onclick="alternarMecanica(this, 'PONTUAÇÃO')"
-                    >
-                        🏆 PONTUAÇÃO
-                    </button>
-
-                    <button
-                        class="mechanic"
-                        onclick="alternarMecanica(this, 'FASES')"
-                    >
-                        🚪 FASES
-                    </button>
 
                 </div>
 
             </div>
 
 
-            <!-- ETAPA 5 -->
+            <div class="course-body">
 
-            <div class="game-step" data-step="5">
-
-                <div class="step-number">05</div>
-
-                <h3>GERAR PROJETO</h3>
-
-                <p>
-                    Revise suas escolhas e transforme sua ideia
-                    em um projeto inicial.
-                </p>
-
-                <div id="projectSummary" class="project-summary">
+                <div class="lesson-label">
+                    MÓDULO DE APRENDIZADO
                 </div>
+
+                <h2 id="lessonTitle"></h2>
+
+                <div id="lessonContent"></div>
+
+                <div id="lessonChallenge"></div>
+
+                <div id="lessonFeedback"></div>
+
+            </div>
+
+
+            <div class="course-footer">
 
                 <button
-                    class="generate-button"
-                    onclick="gerarProjeto()"
-                >
-                    ⚡ GERAR MEU PROJETO
-                </button>
-
-            </div>
-
-
-            <!-- RESULTADO -->
-
-            <div id="generatedProject" class="generated-project">
-
-                <div class="success-header">
-                    <span>✓</span>
-
-                    <div>
-                        <h3>PROJETO GERADO</h3>
-                        <p>Seu primeiro projeto foi planejado.</p>
-                    </div>
-                </div>
-
-                <div id="generatedSummary"></div>
-
-                <div class="code-header">
-                    <span>STARTER_CODE.html</span>
-
-                    <button onclick="copiarCodigo()">
-                        COPIAR CÓDIGO
-                    </button>
-                </div>
-
-                <pre id="generatedCode"></pre>
-
-                <div class="next-learning">
-
-                    <strong>🧠 O QUE VOCÊ APRENDEU?</strong>
-
-                    <p>
-                        Um jogo é formado por elementos como
-                        personagem, regras, mecânicas, fases
-                        e objetivos. Agora você já tem a estrutura
-                        inicial para começar a programar o seu.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- CONTROLES -->
-
-            <div class="builder-controls">
-
-                <button
-                    id="backButton"
+                    id="backLesson"
                     class="secondary-button"
                     onclick="voltarEtapa()"
                 >
@@ -618,8 +414,8 @@
                 </button>
 
                 <button
-                    id="nextButton"
-                    class="main-builder-button"
+                    id="nextLesson"
+                    class="main-button"
                     onclick="proximaEtapa()"
                 >
                     PRÓXIMO →
@@ -632,45 +428,45 @@
     </div>
 
 
-    <!-- =============================== -->
-    <!-- MODAL: TERMINAL -->
-    <!-- =============================== -->
+    <!-- MODAL AULAS EXTRAS -->
+    <div id="simpleModal" class="modal">
 
-    <div id="terminalModal" class="modal">
+        <div class="simple-window">
 
-        <div class="modal-box terminal-modal">
-
-            <button class="close-modal" onclick="fecharModal('terminalModal')">
+            <button class="close-button" onclick="fecharSimple()">
                 ×
             </button>
 
-            <div class="terminal-large">
+            <div id="simpleContent"></div>
 
-                <div class="terminal-top">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <b>TERMINAL</b>
-                </div>
+        </div>
 
-                <div id="terminalOutput" class="terminal-output">
-                    <p>PROGRAMACAO.exe TERMINAL</p>
-                    <p>Digite <b>help</b> para ver os comandos.</p>
-                </div>
+    </div>
 
-                <div class="terminal-input-line">
 
-                    <span>&gt;</span>
+    <!-- TERMINAL -->
+    <div id="terminalModal" class="modal">
 
-                    <input
-                        id="terminalInput"
-                        type="text"
-                        autocomplete="off"
-                        placeholder="digite um comando..."
-                        onkeydown="terminalCommand(event)"
-                    >
+        <div class="terminal-window">
 
-                </div>
+            <button class="close-button" onclick="fecharTerminal()">
+                ×
+            </button>
+
+            <div id="terminalOutput">
+                <p>PROGRAMACAO.exe TERMINAL v1.0</p>
+                <p>Digite <b>help</b> para ver os comandos.</p>
+            </div>
+
+            <div class="terminal-input">
+
+                <span>user@programacao:~$</span>
+
+                <input
+                    id="terminalInput"
+                    autocomplete="off"
+                    onkeydown="terminalKey(event)"
+                >
 
             </div>
 
@@ -682,4 +478,4 @@
     <script src="script.js"></script>
 
 </body>
-    </html>
+                    </html>
