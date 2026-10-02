@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Programação // Central</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #000;
+            color: #00ff66;
+            font-family: "Courier New", monospace;
+            overflow-x: hidden;
+        }
+
+        /* FUNDO HACKER */
+        #matrix {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .codigo {
+            position: absolute;
+            top: -100%;
+            color: #00ff66;
+            font-size: 15px;
+            line-height: 18px;
+            text-shadow: 0 0 8px #00ff66;
+            animation: queda linear infinite;
+            opacity: 0.65;
+        }
+
+        @keyframes queda {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(220vh);
+            }
+        }
+
+        .escuro {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* PAINEL */
+        .painel {
+            width: 92%;
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 30px;
+
+            background: rgba(0, 0, 0, 0.96);
+
+            border: 2px solid #00ff66;
+            border-radius: 12px;
+
+            box-shadow:
+                0 0 10px #00ff66,
+                0 0 25px #00ff66,
+                inset 0 0 20px rgba(0, 255, 102, 0.12);
+        }
+
+        /* TÍTULO */
+        .titulo {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 10px;
+
+            text-shadow:
+                0 0 5px #00ff66,
+                0 0 15px #00ff66,
+                0 0 30px #00ff66;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #8affb8;
+            margin-bottom: 30px;
+        }
+
+        /* MENU */
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .opcao {
+            width: 100%;
+            padding: 18px;
+
+            background: #020602;
+            color: #00ff66;
+
+            border: 1px solid #00ff66;
+            border-radius: 8px;
+
+            font-family: "Courier New", monospace;
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+
+            transition: 0.25s;
+        }
+
+        .opcao:hover {
+            background: #00ff66;
+            color: #000;
+
+            transform: scale(1.02);
+
+            box-shadow:
+                0 0 10px #00ff66,
+                0 0 25px #00ff66;
+        }
+
+        /* CONTEÚDO */
+        .conteudo {
+            display: none;
+            margin-top: 25px;
+
+            border-top: 1px solid #00ff66;
+            padding-top: 25px;
+        }
+
+        .conteudo.ativo {
+            display: block;
+            animation: aparecer 0.3s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .conteudo h2 {
+            color: #00ff66;
+            margin-bottom: 20px;
+
+            text-shadow: 0 0 8px #00ff66;
+        }
+
+        .conteudo h3 {
+            color: #5cff9b;
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        .conteudo p {
+            color: #d8ffe6;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .conteudo ul {
+            margin: 10px 0 15px 25px;
+            color: #d8ffe6;
+            line-height: 1.8;
+        }
+
+        .codigo-exemplo {
+            background: #010401;
+            border-left: 3px solid #00ff66;
+
+            padding: 15px;
+            margin: 15px 0;
+
+            color: #6dff9f;
+
+            overflow-x: auto;
+
+            box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1);
+        }
+
+        /* BOTÃO VOLTAR */
+        .voltar {
+            margin-top: 25px;
+            padding: 12px 20px;
+
+            background: transparent;
+            color: #00ff66;
+
+            border: 1px solid #00ff66;
+            border-radius: 6px;
+
+            font-family: "Courier New", monospace;
+            cursor: pointer;
+        }
+
+        .voltar:hover {
+            background: #00ff66;
+            color: #000;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #4cff8b;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FUNDO COM CÓDIGOS -->
+    <div id="matrix"></div>
+
+    <div class="escuro"></div>
+
+    <!-- PAINEL PRINCIPAL -->
+    <main class="painel">
+
+        <div class="titulo">
+            PROGRAMACAO.exe
+        </div>
+
+        <div class="subtitulo">
+            // CENTRAL DE APRENDIZADO DE PROGRAMAÇÃO
+        </div>
+
+        <!-- TRÊS OPÇÕES -->
+        <div class="menu" id="menu">
+
+            <button class="opcao" onclick="abrir('opcao1')">
+                [ 01 ] COMO FUNCIONA A PROGRAMAÇÃO
+            </button>
+
+            <button class="opcao" onclick="abrir('opcao2')">
+                [ 02 ] COISAS QUE VOCÊ PODE CRIAR USANDO PROGRAMAÇÃO
+            </button>
+
+            <button class="opcao" onclick="abrir('opcao3')">
+                [ 03 ] COMO COMEÇAR A PROGRAMAR DO ZERO
+            </button>
+
+        </div>
+
+
+        <!-- OPÇÃO 1 -->
+        <section class="conteudo" id="opcao1">
+
+            <h2>
+                [ 01 ] COMO FUNCIONA A PROGRAMAÇÃO
+            </h2>
+
+            <p>
+                Programação é o processo de criar instruções para que um
+                computador execute determinadas tarefas. Essas instruções
+                são escritas utilizando linguagens de programação, como
+                JavaScript, Python, Java, C++, C# e muitas outras.
+            </p>
+
+            <h3>O computador entende nossas instruções?</h3>
+
+            <p>
+                O computador trabalha internamente com informações que podem
+                ser representadas por números. As linguagens de programação
+                existem para permitir que seres humanos escrevam instruções
+                de uma maneira muito mais compreensível.
+            </p>
+
+            <p>
+                Um programa transforma essas instruções em operações que o
+                computador consegue executar.
+            </p>
+
+            <h3>Variáveis</h3>
+
+            <p>
+                Uma variável pode ser imaginada como um espaço onde o programa
+                guarda uma informação. Essa informação pode ser um número,
+                texto, valor lógico ou outro tipo de dado.
+            </p>
+
+            <div class="codigo-exemplo">
+                let nome = "Cristiano";<br>
+                let idade = 12;
+            </div>
+
+            <p>
+                Nesse exemplo, o programa guarda um nome e uma idade em duas
+                variáveis.
+            </p>
+
+            <h3>Condições</h3>
+
+            <p>
+                Programas também conseguem tomar decisões. Para isso usamos
+                estruturas condicionais.
+            </p>
+
+            <div class="codigo-exemplo">
+                if (idade &gt;= 18) {<br>
+                &nbsp;&nbsp;console.log("Maior de idade");<br>
+                } else {<br>
+                &nbsp;&nbsp;console.log("Menor de idade");<br>
+                }
+            </div>
+
+            <h3>Repetições</h3>
+
+            <p>
+                Os chamados loops permitem executar uma determinada tarefa
+                várias vezes sem precisar escrever o mesmo comando
+                repetidamente.
+            </p>
+
+            <div class="codigo-exemplo">
+                for (let i = 0; i &lt; 5; i++) {<br>
+                &nbsp;&nbsp;console.log(i);<br>
+                }
+            </div>
+
+            <h3>Funções</h3>
+
+            <p>
+                Funções são blocos de código criados para realizar tarefas
+                específicas. Elas ajudam a organizar programas grandes e
+                permitem reutilizar código.
+            </p>
+
+            <p>
+                Em resumo, programação consiste em transformar um problema
+                em uma sequência organizada de instruções que o computador
+                consegue executar.
+            </p>
+
+            <button class="voltar" onclick="voltar()">
+                &lt; VOLTAR
+            </button>
+
+        </section>
+
+
+        <!-- OPÇÃO 2 -->
+        <section class="conteudo" id="opcao2">
+
+            <h2>
+                [ 02 ] COISAS QUE VOCÊ PODE CRIAR USANDO PROGRAMAÇÃO
+            </h2>
+
+            <p>
+                Programação pode ser utilizada para criar uma enorme
+                variedade de projetos. Ela está presente em sites,
+                aplicativos, jogos, sistemas, ferramentas e muitos outros
+                tipos de tecnologia.
+            </p>
+
+            <h3>🎮 Jogos</h3>
+
+            <p>
+                Você pode usar programação para criar jogos 2D e 3D.
+                Dependendo das ferramentas utilizadas, é possível criar
+                personagens, mapas, inimigos, sistemas de pontuação,
+                inventários e diversas outras mecânicas.
+            </p>
+
+            <h3>🌐 Sites</h3>
+
+            <p>
+                HTML, CSS e JavaScript podem ser utilizados juntos para
+                criar páginas e aplicações web.
+            </p>
+
+            <p>
+                Você pode criar desde uma página pessoal simples até
+                aplicações web muito mais complexas.
+            </p>
+
+            <h3>📱 Aplicativos</h3>
+
+            <p>
+                Programação também pode ser usada para criar aplicativos
+                para celulares. Aplicativos podem ter telas, botões,
+                sistemas de cadastro, bancos de dados e várias outras
+                funcionalidades.
+            </p>
+
+            <h3>🤖 Inteligência artificial</h3>
+
+            <p>
+                Programadores também desenvolvem sistemas que trabalham
+                com inteligência artificial, processamento de linguagem,
+                reconhecimento de padrões e análise de dados.
+            </p>
+
+            <h3>⚙️ Automação</h3>
+
+            <p>
+                Um programa pode executar tarefas automaticamente que
+                normalmente precisariam ser realizadas manualmente.
+            </p>
+
+            <p>
+                Por exemplo, um programa pode organizar arquivos,
+                processar informações ou realizar cálculos repetitivos.
+            </p>
+
+            <h3>🛠️ Ferramentas</h3>
+
+            <p>
+                Você também pode criar suas próprias ferramentas:
+            </p>
+
+            <ul>
+                <li>Calculadoras</li>
+                <li>Conversores</li>
+                <li>Geradores de texto</li>
+                <li>Quizzes</li>
+                <li>Sistemas de anotações</li>
+                <li>Organizadores</li>
+                <li>Pequenos editores</li>
+            </ul>
+
+            <h3>💡 O limite é a sua ideia</h3>
+
+            <p>
+                Programação não é apenas decorar comandos. O objetivo é
+                aprender a transformar uma ideia em um conjunto de instruções
+                que o computador consiga executar.
+            </p>
+
+            <button class="voltar" onclick="voltar()">
+                &lt; VOLTAR
+            </button>
+
+        </section>
+
+
+        <!-- OPÇÃO 3 -->
+        <section class="conteudo" id="opcao3">
+
+            <h2>
+                [ 03 ] COMO COMEÇAR A PROGRAMAR DO ZERO
+            </h2>
+
+            <p>
+                Para começar a programar você não precisa saber tudo de uma
+                vez. O melhor caminho é aprender os conceitos fundamentais
+                e criar pequenos projetos para colocar o conhecimento em
+                prática.
+            </p>
+
+            <h3>1. Escolha uma linguagem</h3>
+
+            <p>
+                Existem várias linguagens de programação. A escolha depende
+                do tipo de projeto que você pretende desenvolver.
+            </p>
+
+            <p>
+                Para desenvolvimento web, por exemplo, JavaScript é uma
+                linguagem muito importante. Python também é bastante utilizada
+                em automação, ciência de dados, inteligência artificial e
+                diversos outros projetos.
+            </p>
+
+            <h3>2. Aprenda os fundamentos</h3>
+
+            <p>
+                Comece estudando variáveis, tipos de dados, operadores,
+                condições, loops, funções e estruturas de dados básicas.
+            </p>
+
+            <h3>3. Pratique</h3>
+
+            <p>
+                Depois de aprender um conceito, tente utilizá-lo em algum
+                projeto pequeno. A prática ajuda a transformar aquilo que
+                você estudou em conhecimento realmente utilizável.
+            </p>
+
+            <h3>4. Crie projetos pequenos</h3>
+
+            <p>
+                Alguns projetos interessantes para quem está começando são:
+            </p>
+
+            <ul>
+                <li>Calculadora</li>
+                <li>Quiz</li>
+                <li>Relógio digital</li>
+                <li>Lista de tarefas</li>
+                <li>Jogo simples</li>
+                <li>Site pessoal</li>
+            </ul>
+
+            <h3>5. Aprenda com os erros</h3>
+
+            <p>
+                Erros fazem parte da programação. Quando alguma coisa não
+                funcionar, leia a mensagem de erro e tente descobrir qual
+                parte do programa causou o problema.
+            </p>
+
+            <h3>6. Aprenda a pesquisar</h3>
+
+            <p>
+                Mesmo programadores experientes precisam consultar
+                documentação e pesquisar soluções. Saber encontrar
+                informações confiáveis é uma habilidade muito importante.
+            </p>
+
+            <h3>7. Evolua gradualmente</h3>
+
+            <p>
+                Depois dos projetos básicos, você pode começar a estudar
+                assuntos mais avançados e construir projetos cada vez
+                maiores.
+            </p>
+
+            <p>
+                O mais importante é não tentar aprender tudo em um único
+                dia. Programação é uma habilidade construída com prática,
+                curiosidade e tempo.
+            </p>
+
+            <button class="voltar" onclick="voltar()">
+                &lt; VOLTAR
+            </button>
+
+        </section>
+
+
+        <footer>
+            SYSTEM ONLINE // PROGRAMACAO.exe
+        </footer>
+
+    </main>
+
+
+    <script>
+
+        /* ================================
+           FUNDO DE CÓDIGOS
+        ================================= */
+
+        const matrix = document.getElementById("matrix");
+
+        const caracteres =
+            "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}[]<>/\\#$%@&*";
+
+        for (let i = 0; i < 75; i++) {
+
+            const coluna = document.createElement("div");
+
+            coluna.className = "codigo";
+
+            let texto = "";
+
+            for (let j = 0; j < 45; j++) {
+                texto +=
+                    caracteres.charAt(
+                        Math.floor(Math.random() * caracteres.length)
+                    ) + "<br>";
+            }
+
+            coluna.innerHTML = texto;
+
+            coluna.style.left =
+                Math.random() * 100 + "%";
+
+            coluna.style.animationDuration =
+                (5 + Math.random() * 8) + "s";
+
+            coluna.style.animationDelay =
+                Math.random() * 8 + "s";
+
+            matrix.appendChild(coluna);
+        }
+
+
+        /* ================================
+           ABRIR OPÇÃO
+        ================================= */
+
+        function abrir(id) {
+
+            document.getElementById("menu").style.display = "none";
+
+            document
+                .querySelectorAll(".conteudo")
+                .forEach(function(elemento) {
+                    elemento.classList.remove("ativo");
+                });
+
+            document
+                .getElementById(id)
+                .classList.add("ativo");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        /* ================================
+           VOLTAR AO MENU
+        ================================= */
+
+        function voltar() {
+
+            document
+                .querySelectorAll(".conteudo")
+                .forEach(function(elemento) {
+                    elemento.classList.remove("ativo");
+                });
+
+            document.getElementById("menu").style.display = "flex";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+    </script>
+
+</body>
+          </html>
