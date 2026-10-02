@@ -1,12 +1,19 @@
-/* ================================= */
-/* MATRIX BACKGROUND */
-/* ================================= */
+/* ==========================================
+   PROGRAMACAO.exe
+   SISTEMA COMPLETO DE CURSOS
+========================================== */
+
+
+/* ==========================================
+   MATRIX
+========================================== */
 
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
 
 let matrixWidth;
 let matrixHeight;
+let fontSize = 14;
 let columns;
 let drops;
 
@@ -15,965 +22,651 @@ function iniciarMatrix() {
     matrixWidth = canvas.width = window.innerWidth;
     matrixHeight = canvas.height = window.innerHeight;
 
-    const fontSize = 14;
-
     columns = Math.floor(matrixWidth / fontSize);
 
     drops = [];
 
     for (let i = 0; i < columns; i++) {
-        drops[i] = Math.random() * -50;
+        drops[i] = Math.random() * matrixHeight / fontSize;
     }
+}
 
-    function desenharMatrix() {
+const matrixChars =
+    "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<>[]{}$#@%";
 
-        ctx.fillStyle = "rgba(0, 0, 0, 0.06)";
-        ctx.fillRect(0, 0, matrixWidth, matrixHeight);
+function desenharMatrix() {
 
-        ctx.fillStyle = "#00ff66";
-        ctx.font = `${fontSize}px monospace`;
+    ctx.fillStyle = "rgba(0, 0, 0, 0.07)";
+    ctx.fillRect(0, 0, matrixWidth, matrixHeight);
 
-        for (let i = 0; i < drops.length; i++) {
+    ctx.fillStyle = "#21ff68";
+    ctx.font = fontSize + "px monospace";
 
-            const caracteres =
-                "01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (let i = 0; i < drops.length; i++) {
 
-            const texto =
-                caracteres[Math.floor(Math.random() * caracteres.length)];
+        const char =
+            matrixChars[
+                Math.floor(Math.random() * matrixChars.length)
+            ];
 
-            ctx.fillText(
-                texto,
-                i * fontSize,
-                drops[i] * fontSize
-            );
+        ctx.fillText(
+            char,
+            i * fontSize,
+            drops[i] * fontSize
+        );
 
-            if (
-                drops[i] * fontSize > matrixHeight &&
-                Math.random() > 0.975
-            ) {
-                drops[i] = 0;
-            }
-
-            drops[i] += 0.7;
+        if (
+            drops[i] * fontSize > matrixHeight &&
+            Math.random() > 0.975
+        ) {
+            drops[i] = 0;
         }
-    }
 
-    setInterval(desenharMatrix, 45);
+        drops[i]++;
+    }
 }
 
 iniciarMatrix();
 
-window.addEventListener("resize", () => {
-    iniciarMatrix();
-});
+setInterval(desenharMatrix, 45);
+
+window.addEventListener("resize", iniciarMatrix);
 
 
-/* ================================= */
-/* AULAS */
-/* ================================= */
+/* ==========================================
+   DIGITAÇÃO
+========================================== */
 
-const aulas = {
+const typingElement = document.getElementById("typing");
 
-    programacao: `
-        <h2>COMO FUNCIONA A <span>PROGRAMAÇÃO</span></h2>
+const typingTexts = [
+    "iniciar aprendizado",
+    "carregar cursos",
+    "abrir programação.exe",
+    "aprender programação"
+];
 
-        <p>
-            Programação é o processo de escrever instruções
-            que um computador consegue executar.
-        </p>
+let typingIndex = 0;
+let charIndex = 0;
+let deleting = false;
 
-        <p>
-            Essas instruções podem usar variáveis, condições,
-            funções, loops e algoritmos para resolver problemas.
-        </p>
+function efeitoDigitacao() {
 
-        <p>
-            Pense em um programa como uma sequência de ordens:
-            entrada → processamento → resultado.
-        </p>
-    `,
+    const texto = typingTexts[typingIndex];
 
-    criacao: `
-        <h2>O QUE VOCÊ PODE <span>CRIAR</span></h2>
+    if (!deleting) {
 
-        <p>
-            Com programação você pode criar sites, jogos,
-            aplicativos, ferramentas, sistemas e experiências
-            interativas.
-        </p>
+        typingElement.textContent =
+            texto.substring(0, charIndex + 1);
 
-        <p>
-            HTML estrutura uma página, CSS cuida da aparência
-            e JavaScript adiciona comportamento.
-        </p>
+        charIndex++;
 
-        <p>
-            O limite principal é sua criatividade e o que você
-            aprende ao longo do caminho.
-        </p>
-    `,
+        if (charIndex === texto.length) {
+            deleting = true;
 
-    comecar: `
-        <h2>COMEÇANDO DO <span>ZERO</span></h2>
+            setTimeout(efeitoDigitacao, 1800);
+            return;
+        }
 
-        <p>
-            Uma boa sequência para começar é aprender lógica
-            de programação e depois praticar com projetos pequenos.
-        </p>
+    } else {
 
-        <p>
-            Para a web, uma sequência simples é:
-            HTML → CSS → JavaScript.
-        </p>
+        typingElement.textContent =
+            texto.substring(0, charIndex - 1);
 
-        <p>
-            Não tente aprender tudo de uma vez.
-            Crie projetos pequenos e aumente a dificuldade
-            aos poucos.
-        </p>
-    `
-};
+        charIndex--;
 
-function mostrarAula(tipo) {
+        if (charIndex === 0) {
+            deleting = false;
 
-    const content = document.getElementById("aulaContent");
+            typingIndex++;
 
-    content.innerHTML = aulas[tipo];
+            if (typingIndex >= typingTexts.length) {
+                typingIndex = 0;
+            }
+        }
+    }
 
-    abrirModal("aulaModal");
+    setTimeout(
+        efeitoDigitacao,
+        deleting ? 40 : 75
+    );
 }
 
+efeitoDigitacao();
 
-/* ================================= */
-/* PESQUISA */
-/* ================================= */
 
-function pesquisarAulas() {
+/* ==========================================
+   PESQUISA
+========================================== */
+
+function pesquisarCursos() {
 
     const termo =
         document
             .getElementById("searchInput")
             .value
-            .toLowerCase();
+            .toLowerCase()
+            .trim();
 
     const cards =
-        document.querySelectorAll(".learning-card");
+        document.querySelectorAll(".searchable");
 
     cards.forEach(card => {
 
         const texto =
-            card.innerText.toLowerCase();
+            card.textContent.toLowerCase();
 
-        card.style.display =
-            texto.includes(termo)
-                ? ""
-                : "none";
-    });
-}
-
-
-/* ================================= */
-/* MODAIS */
-/* ================================= */
-
-function abrirModal(id) {
-
-    const modal = document.getElementById(id);
-
-    if (modal) {
-        modal.classList.add("active");
-        document.body.style.overflow = "hidden";
-    }
-}
-
-function fecharModal(id) {
-
-    const modal = document.getElementById(id);
-
-    if (modal) {
-        modal.classList.remove("active");
-        document.body.style.overflow = "";
-    }
-}
-
-document.querySelectorAll(".modal").forEach(modal => {
-
-    modal.addEventListener("click", event => {
-
-        if (event.target === modal) {
-            modal.classList.remove("active");
-            document.body.style.overflow = "";
+        if (texto.includes(termo)) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
         }
 
     });
-
-});
-
-document.addEventListener("keydown", event => {
-
-    if (event.key === "Escape") {
-
-        document.querySelectorAll(".modal").forEach(modal => {
-            modal.classList.remove("active");
-        });
-
-        document.body.style.overflow = "";
-    }
-
-});
-
-
-/* ================================= */
-/* TERMINAL */
-/* ================================= */
-
-function abrirTerminal() {
-
-    abrirModal("terminalModal");
-
-    setTimeout(() => {
-
-        document
-            .getElementById("terminalInput")
-            .focus();
-
-    }, 100);
-}
-
-function terminalCommand(event) {
-
-    if (event.key !== "Enter") {
-        return;
-    }
-
-    const input =
-        document.getElementById("terminalInput");
-
-    const command =
-        input.value.trim().toLowerCase();
-
-    const output =
-        document.getElementById("terminalOutput");
-
-    if (!command) {
-        return;
-    }
-
-    const line =
-        document.createElement("p");
-
-    line.innerHTML =
-        `&gt; ${escaparHTML(command)}`;
-
-    output.appendChild(line);
-
-    let response = "";
-
-    if (command === "help") {
-
-        response =
-            "Comandos: help, clear, about, jogos, status";
-
-    } else if (command === "about") {
-
-        response =
-            "PROGRAMACAO.exe — central de aprendizado de programação.";
-
-    } else if (command === "jogos") {
-
-        response =
-            "Módulo JOGOS: use o botão CRIAR JOGO para montar seu projeto.";
-
-    } else if (command === "status") {
-
-        response =
-            "SISTEMA ONLINE — TODOS OS MÓDULOS PRINCIPAIS OPERACIONAIS.";
-
-    } else if (command === "clear") {
-
-        output.innerHTML = "";
-        input.value = "";
-        return;
-
-    } else {
-
-        response =
-            `Comando "${escaparHTML(command)}" não encontrado. Digite help.`;
-    }
-
-    const responseLine =
-        document.createElement("p");
-
-    responseLine.textContent = response;
-
-    output.appendChild(responseLine);
-
-    output.scrollTop = output.scrollHeight;
-
-    input.value = "";
-}
-
-function escaparHTML(texto) {
-
-    return texto
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
 }
 
 
-/* ================================= */
-/* MÓDULOS FUTUROS */
-/* ================================= */
-
-function moduloEmBreve(nome) {
-
-    const content =
-        document.getElementById("aulaContent");
-
-    content.innerHTML = `
-        <h2>${escaparHTML(nome)} <span>.exe</span></h2>
-
-        <p>
-            Este módulo ainda está sendo desenvolvido.
-        </p>
-
-        <p>
-            O objetivo é transformar esta área em uma
-            ferramenta realmente funcional, assim como
-            o módulo JOGOS.
-        </p>
-    `;
-
-    abrirModal("aulaModal");
-}
-
-
-/* ================================= */
-/* JOGOS — CENTRAL DE CRIAÇÃO */
-/* ================================= */
-
-let etapaAtual = 1;
-
-const projeto = {
-
-    dimensao: null,
-
-    estilo: null,
-
-    personagem: "",
-
-    mecanicas: []
-
-};
-
-
-/* ABRIR CENTRAL */
-
-function abrirJogos() {
-
-    resetarCriador();
-
-    abrirModal("jogosModal");
-
-}
-
-
-/* RESET */
-
-function resetarCriador() {
-
-    etapaAtual = 1;
-
-    projeto.dimensao = null;
-    projeto.estilo = null;
-    projeto.personagem = "";
-    projeto.mecanicas = [];
-
-    document
-        .querySelectorAll(".game-step")
-        .forEach(step => {
-
-            step.classList.remove("active");
-
-        });
-
-    document
-        .querySelector('.game-step[data-step="1"]')
-        .classList.add("active");
-
-
-    document
-        .querySelectorAll(".choice-card")
-        .forEach(card => {
-
-            card.classList.remove("selected");
-
-        });
-
-
-    document
-        .querySelectorAll(".mechanic")
-        .forEach(button => {
-
-            button.classList.remove("selected");
-
-        });
-
-
-    const character =
-        document.getElementById("characterName");
-
-    const preview =
-        document.getElementById("characterPreview");
-
-    if (character) {
-        character.value = "";
-    }
-
-    if (preview) {
-        preview.textContent = "SEU PERSONAGEM";
-    }
-
-
-    document
-        .getElementById("generatedProject")
-        .classList.remove("active");
-
-
-    atualizarInterface();
-
-}
-
-
-/* ESCOLHER OPÇÃO */
-
-function selecionarEscolha(elemento, tipo, valor) {
-
-    const grupo =
-        elemento.parentElement.querySelectorAll(".choice-card");
-
-    grupo.forEach(card => {
-        card.classList.remove("selected");
-    });
-
-    elemento.classList.add("selected");
-
-    projeto[tipo] = valor;
-
-}
-
-
-/* MECÂNICAS */
-
-function alternarMecanica(elemento, mecanica) {
-
-    elemento.classList.toggle("selected");
-
-    if (elemento.classList.contains("selected")) {
-
-        if (!projeto.mecanicas.includes(mecanica)) {
-            projeto.mecanicas.push(mecanica);
-        }
-
-    } else {
-
-        projeto.mecanicas =
-            projeto.mecanicas.filter(
-                item => item !== mecanica
-            );
-
-    }
-
-}
-
-
-/* PERSONAGEM */
-
-const characterInput =
-    document.getElementById("characterName");
-
-if (characterInput) {
-
-    characterInput.addEventListener("input", () => {
-
-        const nome =
-            characterInput.value.trim();
-
-        document
-            .getElementById("characterPreview")
-            .textContent =
-            nome || "SEU PERSONAGEM";
-
-        projeto.personagem = nome;
-
-    });
-
-}
-
-
-/* PRÓXIMA ETAPA */
-
-function proximaEtapa() {
-
-    if (!validarEtapa()) {
-        return;
-    }
-
-    if (etapaAtual < 5) {
-
-        etapaAtual++;
-
-        mostrarEtapa(etapaAtual);
-
-    }
-
-}
-
-
-/* VOLTAR */
-
-function voltarEtapa() {
-
-    if (etapaAtual > 1) {
-
-        etapaAtual--;
-
-        mostrarEtapa(etapaAtual);
-
-    }
-
-}
-
-
-/* MOSTRAR ETAPA */
-
-function mostrarEtapa(numero) {
-
-    document
-        .querySelectorAll(".game-step")
-        .forEach(step => {
-
-            step.classList.remove("active");
-
-        });
-
-    const novaEtapa =
-        document.querySelector(
-            `.game-step[data-step="${numero}"]`
-        );
-
-    if (novaEtapa) {
-        novaEtapa.classList.add("active");
-    }
-
-
-    atualizarInterface();
-
-
-    if (numero === 5) {
-        montarResumo();
-    }
-
-}
-
-
-/* ATUALIZAR INTERFACE */
-
-function atualizarInterface() {
-
-    const porcentagem =
-        etapaAtual * 20;
-
-    document
-        .getElementById("stepText")
-        .textContent =
-        `ETAPA ${String(etapaAtual).padStart(2, "0")}`;
-
-    document
-        .getElementById("stepPercent")
-        .textContent =
-        `${porcentagem}%`;
-
-    document
-        .getElementById("progressFill")
-        .style.width =
-        `${porcentagem}%`;
-
-
-    const back =
-        document.getElementById("backButton");
-
-    const next =
-        document.getElementById("nextButton");
-
-
-    back.style.visibility =
-        etapaAtual === 1
-            ? "hidden"
-            : "visible";
-
-
-    if (etapaAtual === 5) {
-
-        next.style.display = "none";
-
-    } else {
-
-        next.style.display = "block";
-
-    }
-
-}
-
-
-/* VALIDAR */
-
-function validarEtapa() {
-
-    if (etapaAtual === 1) {
-
-        if (!projeto.dimensao) {
-
-            alert("Escolha 2D ou 3D para continuar.");
-
-            return false;
-        }
-
-    }
-
-
-    if (etapaAtual === 2) {
-
-        if (!projeto.estilo) {
-
-            alert("Escolha um estilo de jogo para continuar.");
-
-            return false;
-        }
-
-    }
-
-
-    if (etapaAtual === 3) {
-
-        const nome =
-            document
-                .getElementById("characterName")
-                .value
-                .trim();
-
-        if (!nome) {
-
-            alert("Digite um nome para o personagem.");
-
-            document
-                .getElementById("characterName")
-                .focus();
-
-            return false;
-        }
-
-        projeto.personagem = nome;
-
-    }
-
-
-    if (etapaAtual === 4) {
-
-        if (projeto.mecanicas.length === 0) {
-
-            alert(
-                "Escolha pelo menos uma mecânica para continuar."
-            );
-
-            return false;
-        }
-
-    }
-
-    return true;
-}
-
-
-/* RESUMO */
-
-function montarResumo() {
-
-    const container =
-        document.getElementById("projectSummary");
-
-    const mecanicas =
-        projeto.mecanicas.length
-            ? projeto.mecanicas.join(", ")
-            : "Nenhuma";
-
-    container.innerHTML = `
-
-        <div class="summary-item">
-            <small>DIMENSÃO</small>
-            <strong>${escaparHTML(projeto.dimensao || "Não definida")}</strong>
-        </div>
-
-        <div class="summary-item">
-            <small>ESTILO</small>
-            <strong>${escaparHTML(projeto.estilo || "Não definido")}</strong>
-        </div>
-
-        <div class="summary-item">
-            <small>PERSONAGEM</small>
-            <strong>${escaparHTML(projeto.personagem || "Não definido")}</strong>
-        </div>
-
-        <div class="summary-item">
-            <small>MECÂNICAS</small>
-            <strong>${escaparHTML(mecanicas)}</strong>
-        </div>
-
-    `;
-}
-
-
-/* ================================= */
-/* GERAR PROJETO */
-/* ================================= */
-
-function gerarProjeto() {
-
-    if (!projeto.dimensao ||
-        !projeto.estilo ||
-        !projeto.personagem ||
-        projeto.mecanicas.length === 0) {
-
-        alert("Complete todas as etapas antes de gerar o projeto.");
-
-        return;
-    }
-
-
-    const codigo =
-        criarCodigoInicial();
-
-
-    document
-        .getElementById("generatedCode")
-        .textContent = codigo;
-
-
-    document
-        .getElementById("generatedSummary")
-        .innerHTML = `
-
-        <div class="generated-summary">
-
-            <div class="summary-item">
-                <small>DIMENSÃO</small>
-                <strong>${escaparHTML(projeto.dimensao)}</strong>
-            </div>
-
-            <div class="summary-item">
-                <small>ESTILO</small>
-                <strong>${escaparHTML(projeto.estilo)}</strong>
-            </div>
-
-            <div class="summary-item">
-                <small>PERSONAGEM</small>
-                <strong>${escaparHTML(projeto.personagem)}</strong>
-            </div>
-
-            <div class="summary-item">
-                <small>MECÂNICAS</small>
-                <strong>${escaparHTML(projeto.mecanicas.join(", "))}</strong>
-            </div>
-
-        </div>
-
-    `;
-
-
-    document
-        .getElementById("generatedProject")
-        .classList.add("active");
-
-
-    document
-        .getElementById("generatedProject")
-        .scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-}
-
-
-/* ================================= */
-/* CÓDIGO INICIAL */
-/* ================================= */
-
-function criarCodigoInicial() {
-
-    const nome =
-        projeto.personagem
-            .replace(/[^a-zA-Z0-9À-ÿ ]/g, "")
-            .trim();
-
-    const nomeSeguro =
-        nome || "Jogador";
-
-    const dimensao =
-        projeto.dimensao;
-
-    const estilo =
-        projeto.estilo;
-
-    const mecanicas =
-        projeto.mecanicas
-            .map(item => `- ${item}`)
-            .join("\n");
-
-
-    return `<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>${nomeSeguro} - Meu Jogo</title>
-
-<style>
-
-body {
-    margin: 0;
-    background: #050505;
-    color: #00ff66;
-    font-family: monospace;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-}
-
-.game {
-    width: min(700px, 90%);
-    padding: 30px;
-    border: 1px solid #00ff66;
-    box-shadow: 0 0 30px #003d1a;
-}
-
-h1 {
-    color: white;
-}
-
-.info {
-    line-height: 1.8;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="game">
-
-<h1>${nomeSeguro}</h1>
-
-<div class="info">
-
-<p>Meu primeiro projeto de jogo!</p>
-
-<p>Dimensão: ${dimensao}</p>
-
-<p>Estilo: ${estilo}</p>
-
-<p>Mecânicas:</p>
-
-<pre>${mecanicas}</pre>
-
-</div>
-
-</div>
-
-
-<script>
-
-console.log("Meu primeiro jogo está iniciando...");
-
-const jogo = {
-
-    dimensao: "${dimensao}",
-
-    estilo: "${estilo}",
-
-    personagem: "${nomeSeguro}",
-
-    mecanicas: ${JSON.stringify(projeto.mecanicas)}
-
-};
-
-console.log(jogo);
-
-</script>
-
-</body>
-
-</html>`;
-}
-
-
-/* ================================= */
-/* COPIAR CÓDIGO */
-/* ================================= */
-
-function copiarCodigo() {
-
-    const codigo =
-        document
-            .getElementById("generatedCode")
-            .textContent;
-
-
-    navigator.clipboard
-        .writeText(codigo)
-        .then(() => {
-
-            const botao =
-                document.querySelector(
-                    ".code-header button"
-                );
-
-            const textoOriginal =
-                botao.textContent;
-
-            botao.textContent =
-                "✓ COPIADO!";
-
-            setTimeout(() => {
-
-                botao.textContent =
-                    textoOriginal;
-
-            }, 1800);
-
-        })
-        .catch(() => {
-
-            alert(
-                "Não foi possível copiar automaticamente. Selecione o código manualmente."
-            );
-
-        });
-
-}
-
-
-/* ================================= */
-/* INICIALIZAÇÃO */
-/* ================================= */
-
-atualizarInterface();
+/* ==========================================
+   DADOS DOS CURSOS
+========================================== */
+
+const cursos = {
+
+    jogos: {
+
+        categoria: "🎮 JOGOS.exe",
+
+        titulo: "ESCOLA DE CRIAÇÃO DE JOGOS",
+
+        etapas: [
+
+            {
+                titulo: "O QUE É UM JOGO?",
+
+                texto: `
+                    <p class="lesson-text">
+                        Um jogo é um sistema de regras no qual o jogador
+                        realiza ações para alcançar objetivos.
+                    </p>
+
+                    <div class="concept-grid">
+
+                        <div class="concept-card">
+                            <h3>🎯 OBJETIVO</h3>
+                            <p>
+                                O jogador precisa ter algo para tentar alcançar.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>📜 REGRAS</h3>
+                            <p>
+                                As regras determinam o que pode e o que não pode acontecer.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>👤 JOGADOR</h3>
+                            <p>
+                                É quem toma decisões dentro do jogo.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>⚔️ DESAFIO</h3>
+                            <p>
+                                Obstáculos fazem o jogador pensar e agir.
+                            </p>
+                        </div>
+
+                    </div>
+                `,
+
+                desafio: {
+                    pergunta: "Qual elemento define aquilo que o jogador precisa alcançar?",
+                    opcoes: [
+                        "Objetivo",
+                        "Cor do menu",
+                        "Nome do arquivo",
+                        "Fonte"
+                    ],
+                    correta: 0
+                }
+            },
+
+            {
+                titulo: "OS 5 ELEMENTOS DE UM JOGO",
+
+                texto: `
+                    <p class="lesson-text">
+                        Antes de pensar em programação, um criador de jogos
+                        precisa entender a estrutura do jogo.
+                    </p>
+
+                    <div class="concept-grid">
+
+                        <div class="concept-card">
+                            <h3>1. PERSONAGEM</h3>
+                            <p>
+                                Quem o jogador controla ou acompanha.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>2. OBJETIVO</h3>
+                            <p>
+                                O que precisa ser realizado.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>3. MUNDO</h3>
+                            <p>
+                                O ambiente onde a experiência acontece.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>4. REGRAS</h3>
+                            <p>
+                                As condições que controlam o funcionamento.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>5. DESAFIOS</h3>
+                            <p>
+                                Problemas que dificultam o objetivo.
+                            </p>
+                        </div>
+
+                    </div>
+                `,
+
+                desafio: {
+                    pergunta: "Qual destes pertence à estrutura de um jogo?",
+                    opcoes: [
+                        "Objetivo",
+                        "Planilha bancária",
+                        "Senha",
+                        "Cabo USB"
+                    ],
+                    correta: 0
+                }
+            },
+
+            {
+                titulo: "2D OU 3D?",
+
+                texto: `
+                    <p class="lesson-text">
+                        Jogos podem utilizar diferentes formas de representação.
+                        Em um jogo 2D, os elementos são representados em duas
+                        dimensões. Em 3D, existe uma representação de profundidade.
+                    </p>
+
+                    <div class="concept-grid">
+
+                        <div class="concept-card">
+                            <h3>🟩 2D</h3>
+                            <p>
+                                Geralmente trabalha com largura e altura.
+                                É muito usado em plataformas e jogos de visão superior.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>🧊 3D</h3>
+                            <p>
+                                Trabalha com largura, altura e profundidade,
+                                permitindo ambientes tridimensionais.
+                            </p>
+                        </div>
+
+                    </div>
+                `,
+
+                desafio: {
+                    pergunta: "Qual dimensão é adicionada para representar profundidade?",
+                    opcoes: [
+                        "3ª dimensão",
+                        "Nenhuma",
+                        "Apenas cor",
+                        "Texto"
+                    ],
+                    correta: 0
+                }
+            },
+
+            {
+                titulo: "MECÂNICAS",
+
+                texto: `
+                    <p class="lesson-text">
+                        Mecânicas são as ações e sistemas que fazem o jogo
+                        funcionar. Elas determinam o que o jogador pode fazer.
+                    </p>
+
+                    <div class="concept-grid">
+
+                        <div class="concept-card">
+                            <h3>🦘 PULAR</h3>
+                            <p>
+                                O personagem pode sair temporariamente do chão.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>💎 COLETAR</h3>
+                            <p>
+                                O jogador pode pegar objetos.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>❤️ VIDA</h3>
+                            <p>
+                                Um sistema pode representar a resistência
+                                ou condição do personagem.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>🏆 PONTUAÇÃO</h3>
+                            <p>
+                                Determina pontos conquistados através de ações.
+                            </p>
+                        </div>
+
+                    </div>
+                `,
+
+                desafio: {
+                    pergunta: "Qual destas é uma mecânica?",
+                    opcoes: [
+                        "Pular",
+                        "Nome do desenvolvedor",
+                        "Tamanho do monitor",
+                        "Pasta do computador"
+                    ],
+                    correta: 0
+                }
+            },
+
+            {
+                titulo: "PLANEJANDO SEU PRIMEIRO JOGO",
+
+                texto: `
+                    <p class="lesson-text">
+                        Agora você vai planejar um jogo. Não estamos criando
+                        código ainda. Primeiro vamos transformar sua ideia
+                        em um projeto organizado.
+                    </p>
+
+                    <label>NOME DO JOGO</label>
+
+                    <input
+                        class="course-input"
+                        id="gameName"
+                        placeholder="Ex: Aventura Neon"
+                    >
+
+                    <label>OBJETIVO</label>
+
+                    <input
+                        class="course-input"
+                        id="gameObjective"
+                        placeholder="Ex: chegar ao final da fase"
+                    >
+
+                    <label>PERSONAGEM PRINCIPAL</label>
+
+                    <input
+                        class="course-input"
+                        id="gameCharacter"
+                        placeholder="Ex: Alex"
+                    >
+
+                    <p class="lesson-text">
+                        Quando você terminar, estará criando um documento
+                        de planejamento — uma das primeiras etapas reais
+                        do desenvolvimento de um jogo.
+                    </p>
+                `,
+
+                desafio: {
+                    pergunta: "Qual deve vir antes da programação?",
+                    opcoes: [
+                        "Planejamento",
+                        "Apagar o projeto",
+                        "Publicar imediatamente",
+                        "Ignorar o objetivo"
+                    ],
+                    correta: 0
+                }
+            },
+
+            {
+                titulo: "DESAFIO FINAL",
+
+                texto: `
+                    <p class="lesson-text">
+                        Parabéns. Você chegou ao desafio final.
+                        Aqui você precisa aplicar o que aprendeu.
+                    </p>
+
+                    <div class="concept-card">
+                        <h3>MISSÃO</h3>
+
+                        <p>
+                            Imagine um jogo em que o personagem precisa
+                            atravessar uma floresta e chegar a uma torre.
+                            Existem obstáculos pelo caminho.
+                        </p>
+
+                        <br>
+
+                        <p>
+                            Pense em:
+                            personagem,
+                            objetivo,
+                            regras,
+                            desafios e mecânicas.
+                        </p>
+                    </div>
+                `,
+
+                desafio: {
+                    pergunta: "O que melhor representa a missão do jogador?",
+                    opcoes: [
+                        "Alcançar a torre",
+                        "A cor do botão",
+                        "O nome do computador",
+                        "A pasta do projeto"
+                    ],
+                    correta: 0
+                }
+            }
+
+        ]
+    },
+
+
+    sites: {
+
+        categoria: "🌐 SITES.exe",
+
+        titulo: "ESCOLA DE CRIAÇÃO DE SITES",
+
+        etapas: [
+
+            {
+                titulo: "COMO UM SITE FUNCIONA?",
+
+                texto: `
+                    <p class="lesson-text">
+                        Um site normalmente combina estrutura, aparência
+                        e comportamento.
+                    </p>
+
+                    <div class="concept-grid">
+
+                        <div class="concept-card">
+                            <h3>HTML</h3>
+                            <p>
+                                Define a estrutura e o conteúdo da página.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>CSS</h3>
+                            <p>
+                                Define aparência, layout, cores e estilos.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>JAVASCRIPT</h3>
+                            <p>
+                                Permite criar comportamentos e interações.
+                            </p>
+                        </div>
+
+                    </div>
+                `,
+
+                desafio: {
+                    pergunta: "Qual tecnologia organiza a estrutura da página?",
+                    opcoes: [
+                        "HTML",
+                        "CSS",
+                        "JavaScript",
+                        "Imagem"
+                    ],
+                    correta: 0
+                }
+            },
+
+            {
+                titulo: "ESTRUTURA HTML",
+
+                texto: `
+                    <p class="lesson-text">
+                        HTML trabalha com elementos. Títulos, parágrafos,
+                        botões, imagens e outras partes da página podem
+                        ser representados por elementos HTML.
+                    </p>
+
+                    <div class="concept-grid">
+
+                        <div class="concept-card">
+                            <h3>TÍTULOS</h3>
+                            <p>
+                                Apresentam os assuntos principais.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>PARÁGRAFOS</h3>
+                            <p>
+                                Apresentam informações em texto.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>BOTÕES</h3>
+                            <p>
+                                Podem iniciar ações.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>LINKS</h3>
+                            <p>
+                                Permitem navegar para outros locais.
+                            </p>
+                        </div>
+
+                    </div>
+                `,
+
+                desafio: {
+                    pergunta: "Para que serve principalmente o HTML?",
+                    opcoes: [
+                        "Estruturar o conteúdo",
+                        "Editar vídeos",
+                        "Criar músicas",
+                        "Formatar o computador"
+                    ],
+                    correta: 0
+                }
+            },
+
+            {
+                titulo: "CSS E DESIGN",
+
+                texto: `
+                    <p class="lesson-text">
+                        CSS transforma uma estrutura simples em uma interface.
+                        Com ele você trabalha com cores, tamanhos, espaços,
+                        bordas, posicionamento e responsividade.
+                    </p>
+
+                    <div class="concept-grid">
+
+                        <div class="concept-card">
+                            <h3>🎨 CORES</h3>
+                            <p>Definem a aparência visual.</p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>📦 LAYOUT</h3>
+                            <p>Organiza os elementos.</p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>📱 RESPONSIVIDADE</h3>
+                            <p>Adapta o site a diferentes telas.</p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>✨ EFEITOS</h3>
+                            <p>Adiciona transições e detalhes visuais.</p>
+                        </div>
+
+                    </div>
+                `,
+
+                desafio: {
+                    pergunta: "Qual tecnologia cuida principalmente da aparência?",
+                    opcoes: [
+                        "CSS",
+                        "HTML",
+                        "JavaScript",
+                        "URL"
+                    ],
+                    correta: 0
+                }
+            },
+
+            {
+                titulo: "JAVASCRIPT E INTERAÇÃO",
+
+                texto: `
+                    <p class="lesson-text">
+                        JavaScript permite que a página reaja às ações
+                        do usuário.
+                    </p>
+
+                    <div class="concept-grid">
+
+                        <div class="concept-card">
+                            <h3>🖱️ CLIQUES</h3>
+                            <p>
+                                Um botão pode executar uma ação.
+                            </p>
+                        </div>
+
+                        <div class="concept-card">
+                            <h3>⌨️ ENTRADAS</h3>
+            
