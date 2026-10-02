@@ -1,6 +1,12 @@
-/* ==========================================
-   FUNDO MATRIX
-========================================== */
+/* =====================================================
+   PROGRAMACAO.exe
+   SCRIPT.JS
+===================================================== */
+
+
+/* =====================================================
+   MATRIX
+===================================================== */
 
 const matrix = document.getElementById("matrix");
 
@@ -9,41 +15,48 @@ const caracteres =
 
 for (let i = 0; i < 85; i++) {
 
-    const coluna = document.createElement("div");
+    const coluna =
+        document.createElement("div");
 
-    coluna.className = "matrix-column";
+    coluna.className =
+        "matrix-column";
 
     let texto = "";
 
-    for (let j = 0; j < 45; j++) {
+    const quantidade =
+        Math.floor(Math.random() * 25) + 15;
+
+    for (let j = 0; j < quantidade; j++) {
 
         texto +=
-            caracteres.charAt(
+            caracteres[
                 Math.floor(
-                    Math.random() * caracteres.length
+                    Math.random() *
+                    caracteres.length
                 )
-            ) + "<br>";
+            ];
 
+        texto += "\n";
     }
 
-    coluna.innerHTML = texto;
+    coluna.textContent = texto;
 
     coluna.style.left =
         Math.random() * 100 + "%";
 
     coluna.style.animationDuration =
-        (5 + Math.random() * 9) + "s";
+        (Math.random() * 8 + 5) + "s";
 
     coluna.style.animationDelay =
-        Math.random() * 8 + "s";
+        Math.random() * 5 + "s";
 
     matrix.appendChild(coluna);
 }
 
 
-/* ==========================================
-   TERMINAL DA PÁGINA
-========================================== */
+/* =====================================================
+   TERMINAL DO HERO
+===================================================== */
 
 const terminalText =
     document.getElementById("terminalText");
@@ -51,10 +64,15 @@ const terminalText =
 const linhasTerminal = [
 
     "> inicializando PROGRAMACAO.exe...",
+
     "> carregando módulos...",
+
     "> verificando sistema...",
+
     "> conexão estabelecida.",
+
     "> sistema pronto.",
+
     "> acesso concedido_"
 
 ];
@@ -70,358 +88,246 @@ function escreverTerminal() {
     const linha =
         document.createElement("div");
 
-    terminalText.appendChild(linha);
-
-    let texto =
+    linha.textContent =
         linhasTerminal[linhaAtual];
 
-    let caractere = 0;
+    terminalText.appendChild(linha);
 
-    const intervalo =
-        setInterval(() => {
+    linhaAtual++;
 
-            linha.textContent +=
-                texto[caractere];
-
-            caractere++;
-
-            if (caractere >= texto.length) {
-
-                clearInterval(intervalo);
-
-                linhaAtual++;
-
-                setTimeout(
-                    escreverTerminal,
-                    250
-                );
-            }
-
-        }, 25);
+    setTimeout(
+        escreverTerminal,
+        600
+    );
 }
 
 escreverTerminal();
 
 
-/* ==========================================
-   CONTEÚDOS DAS 3 OPÇÕES
-========================================== */
+/* =====================================================
+   APRENDIZADO
+===================================================== */
 
 const conteudos = {
 
-    programacao: `
+    programacao: {
 
-        <h2>
-            // COMO FUNCIONA A PROGRAMAÇÃO
-        </h2>
+        titulo:
+            "COMO FUNCIONA A PROGRAMAÇÃO",
 
-        <p>
-            Programação é o processo de criar instruções
-            que um computador consegue executar. Essas
-            instruções são escritas utilizando linguagens
-            de programação.
-        </p>
+        texto: `
 
-        <h3>O computador simplesmente faz o que mandamos?</h3>
+            <h3>Como funciona a programação?</h3>
 
-        <p>
-            De certa maneira, sim. Um programa é uma sequência
-            organizada de instruções. O computador executa essas
-            instruções de acordo com as regras da linguagem e
-            do ambiente em que o programa está sendo executado.
-        </p>
+            <p>
+                Programação é o processo de criar
+                instruções que um computador consegue
+                executar.
+            </p>
 
-        <h3>Variáveis</h3>
+            <p>
+                Um programa normalmente trabalha
+                com dados, decisões, repetições
+                e funções.
+            </p>
 
-        <p>
-            Variáveis permitem guardar informações para que
-            o programa possa utilizá-las posteriormente.
-        </p>
+            <p>
+                Por exemplo, podemos dizer:
+                se o jogador tiver 10 pontos,
+                mostre uma mensagem.
+            </p>
 
-        <h3>Condições</h3>
+            <p>
+                Linguagens como JavaScript,
+                Python, Java e C++ permitem
+                transformar essas ideias em código.
+            </p>
 
-        <p>
-            Condições permitem que o programa tome decisões.
-            Por exemplo: se uma determinada condição for
-            verdadeira, faça uma ação; caso contrário,
-            faça outra.
-        </p>
+        `
 
-        <h3>Repetições</h3>
-
-        <p>
-            Loops permitem repetir uma determinada operação
-            várias vezes. Isso é muito útil quando precisamos
-            trabalhar com grandes quantidades de dados ou
-            executar uma tarefa repetitiva.
-        </p>
-
-        <h3>Funções</h3>
-
-        <p>
-            Funções organizam partes do código em blocos
-            reutilizáveis. Isso ajuda a deixar programas
-            grandes mais organizados.
-        </p>
-
-        <h3>O mais importante</h3>
-
-        <p>
-            Programar não significa apenas decorar comandos.
-            O principal objetivo é aprender a transformar
-            problemas e ideias em uma sequência lógica de
-            instruções.
-        </p>
-
-    `,
+    },
 
 
-    criacao: `
+    criacao: {
 
-        <h2>
-            // COISAS QUE VOCÊ PODE CRIAR USANDO PROGRAMAÇÃO
-        </h2>
+        titulo:
+            "COISAS QUE VOCÊ PODE CRIAR",
 
-        <p>
-            Programação pode ser utilizada para transformar
-            praticamente qualquer ideia que possa ser
-            representada por regras e informações em um
-            sistema computacional.
-        </p>
+        texto: `
 
-        <h3>🎮 Jogos</h3>
+            <h3>O que a programação permite criar?</h3>
 
-        <p>
-            É possível criar jogos com personagens, mapas,
-            inimigos, sistemas de pontuação, inventários,
-            física, menus e muitas outras mecânicas.
-        </p>
+            <p>
+                Programação pode ser usada para
+                criar jogos, sites, aplicativos,
+                ferramentas e sistemas.
+            </p>
 
-        <h3>🌐 Sites</h3>
+            <p>
+                Também pode ser usada para
+                inteligência artificial,
+                automação, análise de dados
+                e muitas outras áreas.
+            </p>
 
-        <p>
-            HTML, CSS e JavaScript permitem criar páginas
-            simples e aplicações web completas.
-        </p>
+            <p>
+                O limite principal é a combinação
+                entre criatividade, conhecimento
+                e tecnologia disponível.
+            </p>
 
-        <h3>📱 Aplicativos</h3>
+        `
 
-        <p>
-            Linguagens e frameworks específicos podem ser
-            utilizados para criar aplicativos para celulares
-            e outros dispositivos.
-        </p>
-
-        <h3>🤖 Inteligência artificial</h3>
-
-        <p>
-            Programação também está presente em sistemas de
-            inteligência artificial, processamento de dados,
-            reconhecimento de padrões e modelos de aprendizado.
-        </p>
-
-        <h3>⚙️ Automação</h3>
-
-        <p>
-            Programas podem automatizar tarefas repetitivas,
-            organizar informações e executar processos de
-            maneira muito mais rápida.
-        </p>
-
-        <h3>🛠️ Ferramentas</h3>
-
-        <p>
-            Você também pode criar calculadoras, conversores,
-            organizadores, sistemas de anotações, geradores,
-            quizzes e diversas outras ferramentas.
-        </p>
-
-        <h3>💡 A ideia é o ponto de partida</h3>
-
-        <p>
-            A programação fornece as ferramentas. A partir
-            delas, você pode transformar uma ideia em um
-            projeto real.
-        </p>
-
-    `,
+    },
 
 
-    comecar: `
+    comecar: {
 
-        <h2>
-            // COMO COMEÇAR A PROGRAMAR DO ZERO
-        </h2>
+        titulo:
+            "COMO COMEÇAR DO ZERO",
 
-        <p>
-            Você não precisa conhecer dezenas de linguagens
-            para começar. O ideal é escolher uma tecnologia,
-            aprender os fundamentos e praticar.
-        </p>
+        texto: `
 
-        <h3>1. Escolha uma linguagem</h3>
+            <h3>Começando a programar</h3>
 
-        <p>
-            Para desenvolvimento web, JavaScript é uma
-            opção importante. Python também é bastante
-            utilizada em automação, dados e inteligência
-            artificial.
-        </p>
+            <p>
+                Primeiro escolha uma linguagem
+                adequada para o que você deseja
+                construir.
+            </p>
 
-        <h3>2. Aprenda os fundamentos</h3>
+            <p>
+                Para sites, HTML, CSS e JavaScript
+                são uma ótima combinação.
+            </p>
 
-        <p>
-            Estude variáveis, tipos de dados, operadores,
-            condições, loops, funções e estruturas básicas.
-        </p>
+            <p>
+                Depois aprenda variáveis,
+                condições, loops, funções
+                e estruturas de dados.
+            </p>
 
-        <h3>3. Faça pequenos projetos</h3>
+            <p>
+                O mais importante é praticar
+                criando pequenos projetos.
+            </p>
 
-        <p>
-            Em vez de apenas assistir aulas, tente construir
-            alguma coisa. Uma calculadora, um quiz, um jogo
-            simples ou uma página web já podem ensinar
-            bastante.
-        </p>
+        `
 
-        <h3>4. Aprenda com os erros</h3>
+    }
 
-        <p>
-            Encontrar erros faz parte do processo. Leia as
-            mensagens apresentadas pelo programa e tente
-            descobrir qual parte do código causou o problema.
-        </p>
-
-        <h3>5. Aprenda a pesquisar</h3>
-
-        <p>
-            Programadores também consultam documentação e
-            referências constantemente. Saber pesquisar é
-            uma habilidade importante.
-        </p>
-
-        <h3>6. Aumente a dificuldade</h3>
-
-        <p>
-            Depois dos projetos básicos, você pode começar
-            a estudar conceitos mais avançados e construir
-            projetos maiores.
-        </p>
-
-        <h3>7. Continue praticando</h3>
-
-        <p>
-            Programação é uma habilidade. Quanto mais você
-            pratica, mais facilidade desenvolve para entender
-            problemas e criar soluções.
-        </p>
-
-    `
 };
 
 
-/* ==========================================
-   ABRIR CONTEÚDO
-========================================== */
-
 function abrirConteudo(tipo) {
 
-    const painel =
+    const conteudo =
         document.getElementById("conteudo");
 
-    const texto =
+    const contentText =
         document.getElementById("contentText");
 
-    texto.innerHTML =
-        conteudos[tipo];
+    contentText.innerHTML =
+        conteudos[tipo].texto;
 
-    painel.classList.add("show");
+    conteudo.classList.add("active");
 
-    painel.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+    conteudo.scrollIntoView({
+        behavior: "smooth"
     });
-
 }
 
-
-/* ==========================================
-   FECHAR CONTEÚDO
-========================================== */
 
 function fecharConteudo() {
 
-    const painel =
-        document.getElementById("conteudo");
-
-    painel.classList.remove("show");
-
+    document
+        .getElementById("conteudo")
+        .classList.remove("active");
 }
 
 
-/* ==========================================
+/* =====================================================
    PESQUISA
-========================================== */
+===================================================== */
 
 const searchInput =
     document.getElementById("searchInput");
 
-const cards =
-    document.querySelectorAll(".card");
+if (searchInput) {
 
-searchInput.addEventListener(
-    "input",
-    function () {
+    searchInput.addEventListener(
+        "input",
+        function () {
 
-        const pesquisa =
-            searchInput.value.toLowerCase();
+            const busca =
+                this.value.toLowerCase();
 
-        cards.forEach(card => {
+            const cards =
+                document.querySelectorAll(
+                    "#learningCards .card"
+                );
 
-            const texto =
-                card.textContent.toLowerCase();
+            cards.forEach(card => {
 
-            if (texto.includes(pesquisa)) {
+                const texto =
+                    card.textContent.toLowerCase();
 
-                card.style.display = "";
+                if (texto.includes(busca)) {
 
-            } else {
+                    card.style.display =
+                        "";
 
-                card.style.display = "none";
+                } else {
 
-            }
+                    card.style.display =
+                        "none";
 
-        });
+                }
 
-    }
-);
+            });
+
+        }
+    );
+}
 
 
-/* ==========================================
-   TERMINAL MODAL
-========================================== */
+/* =====================================================
+   TERMINAL
+===================================================== */
 
 const terminalButton =
-    document.getElementById("terminalButton");
+    document.getElementById(
+        "terminalButton"
+    );
 
 const terminalModal =
-    document.getElementById("terminalModal");
+    document.getElementById(
+        "terminalModal"
+    );
 
 const commandInput =
-    document.getElementById("commandInput");
+    document.getElementById(
+        "commandInput"
+    );
 
 const terminalScreen =
-    document.getElementById("terminalScreen");
+    document.getElementById(
+        "terminalScreen"
+    );
 
 
 terminalButton.addEventListener(
     "click",
     function () {
 
-        terminalModal.classList.add("show");
+        terminalModal.classList.add(
+            "active"
+        );
 
         setTimeout(() => {
+
             commandInput.focus();
+
         }, 100);
 
     }
@@ -430,8 +336,26 @@ terminalButton.addEventListener(
 
 function fecharTerminal() {
 
-    terminalModal.classList.remove("show");
+    terminalModal.classList.remove(
+        "active"
+    );
+}
 
+
+function escreverTerminalLinha(texto) {
+
+    const linha =
+        document.createElement("p");
+
+    linha.innerHTML =
+        texto;
+
+    terminalScreen.insertBefore(
+        linha,
+        document.querySelector(
+            ".terminal-input"
+        )
+    );
 }
 
 
@@ -448,51 +372,68 @@ commandInput.addEventListener(
                 .trim()
                 .toLowerCase();
 
+        commandInput.value = "";
+
         if (!comando) {
             return;
         }
 
-        const resposta =
-            document.createElement("p");
 
-        resposta.innerHTML =
-            "&gt; " + comando;
-
-        terminalScreen.insertBefore(
-            resposta,
-            terminalScreen.querySelector(".terminal-input")
+        escreverTerminalLinha(
+            "&gt; " + comando
         );
-
-
-        const resultado =
-            document.createElement("p");
 
 
         if (comando === "help") {
 
-            resultado.textContent =
-                "> comandos: help, clear, about, status";
+            escreverTerminalLinha(
+                "Comandos: help, about, status, projects, learn, clear"
+            );
 
         }
 
         else if (comando === "about") {
 
-            resultado.textContent =
-                "> PROGRAMACAO.exe é uma central de aprendizado.";
+            escreverTerminalLinha(
+                "PROGRAMACAO.exe — central de aprendizado e projetos."
+            );
 
         }
 
         else if (comando === "status") {
 
-            resultado.textContent =
-                "> sistema: ONLINE | versão: 1.0";
+            escreverTerminalLinha(
+                "STATUS: ONLINE | SISTEMA: OPERACIONAL | VERSÃO: 2.0"
+            );
+
+        }
+
+        else if (comando === "projects") {
+
+            escreverTerminalLinha(
+                "Projetos: JOGOS, SITES, APLICATIVOS, IA, AUTOMAÇÃO, FERRAMENTAS."
+            );
+
+        }
+
+        else if (comando === "learn") {
+
+            escreverTerminalLinha(
+                "Módulos de aprendizado disponíveis: 03."
+            );
 
         }
 
         else if (comando === "clear") {
 
             terminalScreen.innerHTML = `
+
+                <p>
+                    &gt; Terminal limpo.
+                </p>
+
                 <div class="terminal-input">
+
                     <span>&gt;</span>
 
                     <input
@@ -500,42 +441,33 @@ commandInput.addEventListener(
                         type="text"
                         placeholder="digite um comando..."
                     >
+
                 </div>
+
             `;
 
-            configurarTerminal();
-
-            return;
+            configurarNovoTerminal();
 
         }
 
         else {
 
-            resultado.textContent =
-                "> comando não encontrado. Digite: help";
+            escreverTerminalLinha(
+                "Comando não encontrado. Digite 'help'."
+            );
 
         }
-
-
-        terminalScreen.insertBefore(
-            resultado,
-            terminalScreen.querySelector(".terminal-input")
-        );
-
-        commandInput.value = "";
 
     }
 );
 
 
-/* ==========================================
-   RECONFIGURAR TERMINAL
-========================================== */
-
-function configurarTerminal() {
+function configurarNovoTerminal() {
 
     const novoInput =
-        document.getElementById("commandInput");
+        document.getElementById(
+            "commandInput"
+        );
 
     novoInput.addEventListener(
         "keydown",
@@ -543,27 +475,299 @@ function configurarTerminal() {
 
             if (event.key === "Enter") {
 
-                const comando =
-                    novoInput.value
-                        .trim()
-                        .toLowerCase();
-
-                const resultado =
-                    document.createElement("p");
-
-                resultado.textContent =
-                    "> " + comando;
-
-                terminalScreen.insertBefore(
-                    resultado,
-                    terminalScreen.querySelector(".terminal-input")
+                commandInput.dispatchEvent(
+                    new KeyboardEvent(
+                        "keydown",
+                        {
+                            key: "Enter"
+                        }
+                    )
                 );
-
-                novoInput.value = "";
 
             }
 
         }
     );
+}
 
-  }
+
+/* =====================================================
+   MENSAGEM DOS PROJETOS
+===================================================== */
+
+function mostrarEmBreve(nome) {
+
+    alert(
+        nome +
+        " será o próximo módulo funcional do PROGRAMACAO.exe."
+    );
+}
+
+
+/* =====================================================
+   JOGOS.exe
+===================================================== */
+
+const jogosModal =
+    document.getElementById(
+        "jogosModal"
+    );
+
+const neonGame =
+    document.getElementById(
+        "neonGame"
+    );
+
+const alvo =
+    document.getElementById(
+        "alvo"
+    );
+
+const campoJogo =
+    document.getElementById(
+        "campoJogo"
+    );
+
+const pontosTexto =
+    document.getElementById(
+        "pontos"
+    );
+
+const tempoTexto =
+    document.getElementById(
+        "tempo"
+    );
+
+const inicioJogo =
+    document.getElementById(
+        "inicioJogo"
+    );
+
+const fimJogo =
+    document.getElementById(
+        "fimJogo"
+    );
+
+const pontuacaoFinal =
+    document.getElementById(
+        "pontuacaoFinal"
+    );
+
+
+let pontos = 0;
+
+let tempo = 30;
+
+let intervaloJogo = null;
+
+let partidaAtiva = false;
+
+
+/* ABRIR JOGOS */
+
+function abrirJogos() {
+
+    jogosModal.classList.add(
+        "active"
+    );
+
+    neonGame.style.display =
+        "none";
+
+    clearInterval(
+        intervaloJogo
+    );
+
+    partidaAtiva = false;
+}
+
+
+/* FECHAR JOGOS */
+
+function fecharJogos() {
+
+    jogosModal.classList.remove(
+        "active"
+    );
+
+    clearInterval(
+        intervaloJogo
+    );
+
+    partidaAtiva = false;
+
+    alvo.style.display =
+        "none";
+}
+
+
+/* ABRIR NEON TARGET */
+
+function iniciarNeonTarget() {
+
+    neonGame.style.display =
+        "block";
+
+    pontos = 0;
+
+    tempo = 30;
+
+    pontosTexto.textContent =
+        pontos;
+
+    tempoTexto.textContent =
+        tempo;
+
+    inicioJogo.style.display =
+        "flex";
+
+    fimJogo.style.display =
+        "none";
+
+    alvo.style.display =
+        "none";
+}
+
+
+/* COMEÇAR PARTIDA */
+
+function comecarPartida() {
+
+    clearInterval(
+        intervaloJogo
+    );
+
+    pontos = 0;
+
+    tempo = 30;
+
+    partidaAtiva = true;
+
+    pontosTexto.textContent =
+        pontos;
+
+    tempoTexto.textContent =
+        tempo;
+
+    inicioJogo.style.display =
+        "none";
+
+    fimJogo.style.display =
+        "none";
+
+    alvo.style.display =
+        "block";
+
+    moverAlvo();
+
+
+    intervaloJogo =
+        setInterval(
+            function () {
+
+                tempo--;
+
+                tempoTexto.textContent =
+                    tempo;
+
+                if (tempo <= 0) {
+
+                    terminarPartida();
+
+                }
+
+            },
+            1000
+        );
+}
+
+
+/* ACERTAR ALVO */
+
+function acertarAlvo() {
+
+    if (!partidaAtiva) {
+        return;
+    }
+
+    pontos++;
+
+    pontosTexto.textContent =
+        pontos;
+
+    moverAlvo();
+}
+
+
+/* MOVER ALVO */
+
+function moverAlvo() {
+
+    const largura =
+        campoJogo.clientWidth;
+
+    const altura =
+        campoJogo.clientHeight;
+
+    const tamanho =
+        55;
+
+    const x =
+        Math.random() *
+        (largura - tamanho);
+
+    const y =
+        Math.random() *
+        (altura - tamanho);
+
+    alvo.style.left =
+        x + "px";
+
+    alvo.style.top =
+        y + "px";
+}
+
+
+/* TERMINAR PARTIDA */
+
+function terminarPartida() {
+
+    partidaAtiva = false;
+
+    clearInterval(
+        intervaloJogo
+    );
+
+    alvo.style.display =
+        "none";
+
+    pontuacaoFinal.textContent =
+        pontos;
+
+    fimJogo.style.display =
+        "flex";
+}
+
+
+/* =====================================================
+   FECHAR MODAIS CLICANDO FORA
+===================================================== */
+
+window.addEventListener(
+    "click",
+    function (event) {
+
+        if (event.target === jogosModal) {
+
+            fecharJogos();
+
+        }
+
+        if (event.target === terminalModal) {
+
+            fecharTerminal();
+
+        }
+
+    }
+);
