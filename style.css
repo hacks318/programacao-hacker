@@ -1,3 +1,8 @@
+/* =========================
+   PROGRAMACAO.exe
+   STYLE.CSS
+========================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -9,32 +14,47 @@ html {
 }
 
 body {
-    background: #000;
-    color: #d8ffe5;
+    background: #020202;
+    color: #eafff0;
     font-family: "Courier New", monospace;
     overflow-x: hidden;
 }
 
-/* FUNDO */
+button,
+input {
+    font-family: inherit;
+}
+
+
+/* =========================
+   MATRIX
+========================= */
 
 #matrix {
     position: fixed;
     inset: 0;
-    z-index: -3;
+
     overflow: hidden;
-    background: #000;
+
+    pointer-events: none;
+
+    z-index: -3;
+
+    opacity: 0.22;
 }
 
 .matrix-column {
     position: absolute;
-    top: -100%;
-    color: #00ff66;
-    font-size: 14px;
-    line-height: 18px;
-    opacity: 0.45;
 
-    text-shadow:
-        0 0 5px #00ff66;
+    top: -300px;
+
+    color: #00ff66;
+
+    font-size: 16px;
+
+    line-height: 18px;
+
+    white-space: pre;
 
     animation: matrixFall linear infinite;
 }
@@ -42,226 +62,268 @@ body {
 @keyframes matrixFall {
 
     from {
-        transform: translateY(-100%);
+        transform: translateY(-300px);
     }
 
     to {
-        transform: translateY(220vh);
+        transform: translateY(110vh);
     }
 
 }
 
+
+/* =========================
+   OVERLAY
+========================= */
+
 .overlay {
     position: fixed;
+
     inset: 0;
+
+    pointer-events: none;
+
+    z-index: -2;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(0, 255, 102, 0.08),
-            rgba(0, 0, 0, 0.9)
+            transparent 0%,
+            rgba(0, 0, 0, .3) 60%,
+            rgba(0, 0, 0, .85) 100%
         );
-
-    z-index: -2;
 }
 
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
 
-    min-height: 70px;
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    padding: 15px 5%;
+    gap: 20px;
 
-    background: rgba(0, 0, 0, 0.92);
+    padding: 18px 5%;
 
-    border-bottom: 1px solid rgba(0, 255, 102, 0.5);
+    background: rgba(0, 0, 0, .92);
 
     backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid #00ff66;
 }
 
 .logo {
+
     color: #00ff66;
+
     font-weight: bold;
+
+    font-size: 18px;
 
     text-shadow:
         0 0 8px #00ff66;
 }
 
 nav {
+
     display: flex;
+
     gap: 25px;
 }
 
 nav a {
-    color: #9affbd;
-    text-decoration: none;
-    font-size: 13px;
 
-    transition: 0.2s;
+    color: #aaa;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition: .2s;
 }
 
 nav a:hover {
+
     color: #00ff66;
 
     text-shadow:
-        0 0 10px #00ff66;
+        0 0 8px #00ff66;
 }
 
 #terminalButton {
+
     padding: 9px 14px;
 
     color: #00ff66;
+
     background: transparent;
 
     border: 1px solid #00ff66;
 
-    font-family: inherit;
-
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: .2s;
 }
 
 #terminalButton:hover {
-    color: #000;
+
     background: #00ff66;
 
+    color: #000;
+
     box-shadow:
-        0 0 15px #00ff66;
+        0 0 20px #00ff66;
 }
 
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero {
-    min-height: 90vh;
+
+    min-height: 85vh;
 
     display: flex;
+
     flex-direction: column;
-    align-items: center;
+
     justify-content: center;
+
+    align-items: center;
 
     text-align: center;
 
-    padding: 50px 20px;
+    padding: 80px 20px;
 }
-
-.hero h1 {
-    margin-top: 35px;
-
-    font-size: clamp(40px, 8vw, 80px);
-
-    line-height: 0.95;
-
-    color: white;
-}
-
-.hero h1 span {
-    color: #00ff66;
-
-    text-shadow:
-        0 0 10px #00ff66,
-        0 0 30px rgba(0, 255, 102, 0.6);
-}
-
-.hero > p {
-    max-width: 650px;
-
-    margin: 25px 0;
-
-    line-height: 1.7;
-
-    color: #a8cdb5;
-}
-
-
-/* TERMINAL */
 
 .terminal {
-    width: min(700px, 95%);
 
-    background: #020402;
+    width: min(700px, 90vw);
 
-    border: 1px solid #00ff66;
+    margin-bottom: 40px;
 
-    border-radius: 8px;
+    text-align: left;
+
+    border: 1px solid rgba(0, 255, 102, .5);
+
+    background: rgba(0, 0, 0, .85);
 
     box-shadow:
-        0 0 20px rgba(0, 255, 102, 0.2);
+        0 0 25px rgba(0, 255, 102, .1);
 }
 
 .terminal-top {
+
     display: flex;
+
     align-items: center;
-    gap: 8px;
 
-    padding: 10px 14px;
+    gap: 7px;
 
-    border-bottom: 1px solid rgba(0, 255, 102, 0.3);
+    padding: 10px 15px;
+
+    border-bottom: 1px solid
+        rgba(0, 255, 102, .25);
 
     color: #00ff66;
 }
 
 .terminal-top strong {
+
     margin-left: 10px;
 
     font-size: 12px;
+
+    color: #777;
 }
 
 .terminal-body {
-    min-height: 100px;
+
+    min-height: 150px;
 
     padding: 20px;
 
-    text-align: left;
+    color: #00ff66;
+
+    line-height: 1.8;
+
+    font-size: 13px;
+}
+
+.hero h1 {
+
+    font-size: clamp(40px, 8vw, 90px);
+
+    line-height: .95;
+
+    margin-bottom: 25px;
+
+    color: #fff;
+}
+
+.hero h1 span {
 
     color: #00ff66;
 
+    text-shadow:
+        0 0 15px rgba(0, 255, 102, .5);
+}
+
+.hero > p {
+
+    max-width: 650px;
+
+    color: #999;
+
     line-height: 1.7;
+
+    margin-bottom: 30px;
 }
 
 .hero-button {
-    display: inline-block;
 
-    padding: 15px 25px;
+    padding: 14px 20px;
 
-    color: #000;
-    background: #00ff66;
-
-    text-decoration: none;
-
-    font-weight: bold;
+    color: #00ff66;
 
     border: 1px solid #00ff66;
 
-    box-shadow:
-        0 0 15px rgba(0, 255, 102, 0.4);
+    text-decoration: none;
 
-    transition: 0.2s;
+    transition: .2s;
 }
 
 .hero-button:hover {
-    background: transparent;
-    color: #00ff66;
+
+    background: #00ff66;
+
+    color: #000;
 
     box-shadow:
-        0 0 25px #00ff66;
+        0 0 25px rgba(0, 255, 102, .5);
 }
 
 
-/* SEÇÕES */
+/* =========================
+   SEÇÕES
+========================= */
 
 .section {
-    width: min(1100px, 92%);
+
+    width: min(1100px, 90%);
 
     margin: 0 auto;
 
@@ -269,131 +331,149 @@ nav a:hover {
 }
 
 .section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
     margin-bottom: 35px;
-
-    border-left: 3px solid #00ff66;
-
-    padding-left: 18px;
 }
 
 .section-title span {
+
     color: #00ff66;
 
     font-size: 13px;
 }
 
 .section-title h2 {
-    margin-top: 7px;
 
-    color: white;
+    font-size: clamp(20px, 4vw, 32px);
 
-    font-size: clamp(24px, 4vw, 40px);
+    color: #fff;
 }
 
 
-/* PESQUISA */
+/* =========================
+   PESQUISA
+========================= */
 
 .search-box {
+
     display: flex;
+
     align-items: center;
 
-    gap: 12px;
+    gap: 10px;
 
-    padding: 15px 18px;
+    border: 1px solid
+        rgba(0, 255, 102, .3);
 
-    margin-bottom: 30px;
+    padding: 12px 15px;
 
-    background: rgba(0, 10, 4, 0.9);
+    margin-bottom: 25px;
 
-    border: 1px solid rgba(0, 255, 102, 0.5);
-
-    box-shadow:
-        inset 0 0 15px rgba(0, 255, 102, 0.05);
+    background: rgba(0, 0, 0, .7);
 }
 
 .search-box span {
+
     color: #00ff66;
+
     font-size: 22px;
 }
 
 .search-box input {
-    width: 100%;
 
-    border: none;
-    outline: none;
+    width: 100%;
 
     background: transparent;
 
-    color: #00ff66;
+    border: none;
 
-    font-family: inherit;
-    font-size: 15px;
+    outline: none;
+
+    color: #fff;
 }
 
 
-/* CARDS */
+/* =========================
+   CARDS
+========================= */
 
 .cards {
+
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(250px, 1fr));
+        repeat(3, 1fr);
 
     gap: 20px;
 }
 
 .card {
+
     position: relative;
 
-    padding: 28px;
+    padding: 25px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(0, 20, 8, 0.95),
-            rgba(0, 0, 0, 0.95)
-        );
+    min-height: 300px;
 
-    border: 1px solid rgba(0, 255, 102, 0.5);
+    border: 1px solid
+        rgba(0, 255, 102, .25);
 
-    transition: 0.3s;
+    background: rgba(0, 0, 0, .7);
+
+    transition: .25s;
 }
 
 .card:hover {
-    transform: translateY(-6px);
 
     border-color: #00ff66;
 
+    transform: translateY(-5px);
+
     box-shadow:
-        0 0 20px rgba(0, 255, 102, 0.2);
+        0 0 25px
+        rgba(0, 255, 102, .12);
 }
 
 .card-number {
+
     color: #00ff66;
 
-    font-size: 30px;
+    font-size: 13px;
 
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .card h3 {
-    color: white;
+
+    font-size: 18px;
 
     margin-bottom: 15px;
-
-    line-height: 1.4;
 }
 
 .card p {
-    color: #9eb5a5;
+
+    color: #888;
 
     line-height: 1.7;
 
-    margin-bottom: 20px;
+    font-size: 13px;
 }
 
 .card button {
-    padding: 10px 15px;
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 25px;
+
+    padding: 8px 12px;
 
     background: transparent;
 
@@ -401,86 +481,136 @@ nav a:hover {
 
     border: 1px solid #00ff66;
 
-    font-family: inherit;
-
     cursor: pointer;
 }
 
 .card button:hover {
+
     background: #00ff66;
+
     color: #000;
 }
 
 
-/* CONTEÚDO */
+/* =========================
+   CONTEÚDO
+========================= */
 
 .content-panel {
+
     display: none;
 
-    margin-top: 30px;
+    margin-top: 25px;
 
-    padding: 35px;
-
-    background: rgba(0, 5, 2, 0.97);
+    padding: 30px;
 
     border: 1px solid #00ff66;
 
-    box-shadow:
-        0 0 25px rgba(0, 255, 102, 0.15);
+    background: rgba(0, 0, 0, .9);
 }
 
-.content-panel.show {
+.content-panel.active {
+
     display: block;
-    animation: appear 0.3s ease;
 }
 
-@keyframes appear {
+.close-content {
 
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
+    margin-bottom: 20px;
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    padding: 8px 12px;
 
-}
+    background: transparent;
 
-.content-panel h2 {
     color: #00ff66;
 
-    margin-bottom: 25px;
+    border: 1px solid #00ff66;
+
+    cursor: pointer;
 }
 
 .content-panel h3 {
-    color: #72ff9f;
 
-    margin-top: 25px;
-    margin-bottom: 10px;
+    color: #00ff66;
+
+    margin-bottom: 15px;
 }
 
 .content-panel p {
-    color: #d3e9da;
+
+    color: #aaa;
 
     line-height: 1.8;
 
     margin-bottom: 15px;
 }
 
-.content-panel ul {
-    margin-left: 25px;
 
-    color: #d3e9da;
+/* =========================
+   PROJETOS
+========================= */
 
-    line-height: 1.9;
+.project-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
 }
 
-.close-content {
-    margin-bottom: 25px;
+.project {
 
-    padding: 10px 15px;
+    padding: 25px;
+
+    border: 1px solid
+        rgba(0, 255, 102, .25);
+
+    background: rgba(0, 0, 0, .75);
+
+    transition: .25s;
+}
+
+.project:hover {
+
+    border-color: #00ff66;
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 0 20px
+        rgba(0, 255, 102, .1);
+}
+
+.project-icon {
+
+    font-size: 35px;
+
+    margin-bottom: 20px;
+}
+
+.project h3 {
+
+    color: #fff;
+
+    margin-bottom: 10px;
+}
+
+.project p {
+
+    color: #888;
+
+    line-height: 1.6;
+
+    font-size: 13px;
+}
+
+.project button {
+
+    margin-top: 15px;
+
+    padding: 9px 13px;
 
     background: transparent;
 
@@ -488,74 +618,36 @@ nav a:hover {
 
     border: 1px solid #00ff66;
 
-    font-family: inherit;
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.project button:hover {
+
+    background: #00ff66;
+
+    color: #000;
+
+    box-shadow:
+        0 0 15px #00ff66;
+}
+
+.project-clickable {
 
     cursor: pointer;
 }
 
-.close-content:hover {
-    background: #00ff66;
-    color: #000;
-}
 
+/* =========================
+   SOBRE
+========================= */
 
-/* PROJETOS */
+.about p {
 
-.project-grid {
-    display: grid;
+    max-width: 800px;
 
-    grid-template-columns:
-        repeat(auto-fit, minmax(230px, 1fr));
-
-    gap: 18px;
-}
-
-.project {
-    padding: 25px;
-
-    background: rgba(0, 5, 2, 0.9);
-
-    border: 1px solid rgba(0, 255, 102, 0.35);
-
-    transition: 0.3s;
-}
-
-.project:hover {
-    border-color: #00ff66;
-
-    box-shadow:
-        0 0 20px rgba(0, 255, 102, 0.15);
-
-    transform: translateY(-4px);
-}
-
-.project-icon {
-    font-size: 30px;
-
-    margin-bottom: 15px;
-}
-
-.project h3 {
-    color: #00ff66;
-
-    margin-bottom: 10px;
-}
-
-.project p {
-    color: #9eb5a5;
-
-    line-height: 1.6;
-}
-
-
-/* SOBRE */
-
-.about {
-    max-width: 900px;
-}
-
-.about > p {
-    color: #b9cfbf;
+    color: #999;
 
     line-height: 1.8;
 
@@ -563,10 +655,11 @@ nav a:hover {
 }
 
 .status {
+
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(150px, 1fr));
+        repeat(3, 1fr);
 
     gap: 15px;
 
@@ -574,17 +667,20 @@ nav a:hover {
 }
 
 .status div {
+
     padding: 20px;
 
-    border: 1px solid rgba(0, 255, 102, 0.35);
+    border: 1px solid
+        rgba(0, 255, 102, .25);
 
-    background: rgba(0, 15, 5, 0.8);
+    background: #050505;
 }
 
 .status span {
+
     display: block;
 
-    color: #718c79;
+    color: #666;
 
     font-size: 11px;
 
@@ -592,112 +688,158 @@ nav a:hover {
 }
 
 .status strong {
+
     color: #00ff66;
 }
 
 
-/* RODAPÉ */
+/* =========================
+   FOOTER
+========================= */
 
 footer {
+
     padding: 50px 20px;
 
     text-align: center;
 
-    border-top: 1px solid rgba(0, 255, 102, 0.3);
-
-    color: #6d8c76;
+    border-top: 1px solid
+        rgba(0, 255, 102, .2);
 }
 
 .footer-logo {
+
     color: #00ff66;
 
-    font-size: 20px;
+    font-weight: bold;
 
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 footer p {
-    margin-bottom: 12px;
+
+    color: #666;
+
+    font-size: 12px;
+
+    margin-bottom: 10px;
+}
+
+footer span {
+
+    color: #444;
+
+    font-size: 11px;
 }
 
 
-/* MODAL TERMINAL */
+/* =========================
+   MODAIS
+========================= */
 
 .modal {
-    display: none;
 
     position: fixed;
 
     inset: 0;
 
-    z-index: 100;
+    z-index: 500;
+
+    display: none;
+
+    justify-content: center;
 
     align-items: center;
-    justify-content: center;
 
     padding: 20px;
 
-    background: rgba(0, 0, 0, 0.8);
+    background:
+        rgba(0, 0, 0, .85);
+
+    backdrop-filter: blur(5px);
 }
 
-.modal.show {
+.modal.active {
+
     display: flex;
-}
-
-.modal-terminal {
-    width: min(800px, 100%);
-
-    background: #000;
-
-    border: 1px solid #00ff66;
-
-    box-shadow:
-        0 0 40px rgba(0, 255, 102, 0.3);
 }
 
 .modal-header {
+
     display: flex;
+
+    align-items: center;
 
     justify-content: space-between;
 
-    padding: 15px;
+    padding: 12px 15px;
+
+    border-bottom: 1px solid
+        rgba(0, 255, 102, .3);
 
     color: #00ff66;
-
-    border-bottom: 1px solid #00ff66;
 }
 
 .modal-header button {
-    background: transparent;
 
     border: none;
+
+    background: transparent;
 
     color: #00ff66;
 
     cursor: pointer;
 
-    font-family: inherit;
+    font-weight: bold;
+}
+
+
+/* =========================
+   TERMINAL MODAL
+========================= */
+
+.modal-terminal {
+
+    width: min(700px, 95vw);
+
+    background: #030303;
+
+    border: 1px solid #00ff66;
+
+    box-shadow:
+        0 0 40px
+        rgba(0, 255, 102, .2);
 }
 
 .terminal-screen {
+
     min-height: 350px;
 
     padding: 20px;
 
     color: #00ff66;
 
-    line-height: 1.8;
+    line-height: 1.7;
+
+    overflow-y: auto;
 }
 
 .terminal-input {
+
     display: flex;
 
     gap: 8px;
 
-    margin-top: 15px;
+    margin-top: 20px;
+}
+
+.terminal-input span {
+
+    color: #00ff66;
 }
 
 .terminal-input input {
+
     flex: 1;
 
     background: transparent;
@@ -707,45 +849,381 @@ footer p {
     outline: none;
 
     color: #00ff66;
-
-    font-family: inherit;
 }
 
 
-/* CELULAR */
+/* =========================
+   JOGOS
+========================= */
 
-@media (max-width: 700px) {
+.jogos-painel {
+
+    width: min(750px, 95vw);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #030303;
+
+    border: 1px solid #00ff66;
+
+    box-shadow:
+        0 0 40px
+        rgba(0, 255, 102, .25);
+}
+
+.jogos-conteudo {
+
+    padding: 25px;
+}
+
+.jogos-conteudo h2 {
+
+    color: #00ff66;
+
+    text-shadow:
+        0 0 12px #00ff66;
+
+    margin-bottom: 8px;
+}
+
+.jogos-status {
+
+    color: #666;
+
+    margin-bottom: 25px;
+}
+
+.jogo-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    background: #070707;
+
+    border: 1px solid
+        rgba(0, 255, 102, .3);
+}
+
+.jogo-icon {
+
+    font-size: 45px;
+}
+
+.jogo-card h3 {
+
+    color: #00ff66;
+
+    margin-bottom: 8px;
+}
+
+.jogo-card p {
+
+    color: #888;
+
+    line-height: 1.6;
+
+    font-size: 13px;
+}
+
+.jogos-conteudo button {
+
+    padding: 10px 16px;
+
+    background: transparent;
+
+    color: #00ff66;
+
+    border: 1px solid #00ff66;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.jogos-conteudo button:hover {
+
+    background: #00ff66;
+
+    color: #000;
+
+    box-shadow:
+        0 0 15px #00ff66;
+}
+
+
+/* =========================
+   NEON TARGET
+========================= */
+
+.neon-game {
+
+    display: none;
+
+    margin-top: 20px;
+}
+
+.game-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 12px;
+
+    background: #070707;
+
+    border: 1px solid
+        rgba(0, 255, 102, .3);
+
+    color: #888;
+}
+
+.game-top strong {
+
+    color: #00ff66;
+}
+
+.campo-jogo {
+
+    position: relative;
+
+    height: 400px;
+
+    margin-top: 10px;
+
+    overflow: hidden;
+
+    border: 1px solid
+        rgba(0, 255, 102, .3);
+
+    background:
+        linear-gradient(
+            rgba(0, 255, 102, .04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 255, 102, .04) 1px,
+            transparent 1px
+        ),
+        #020202;
+
+    background-size:
+        30px 30px;
+}
+
+#inicioJogo {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+#inicioJogo h3 {
+
+    color: #00ff66;
+
+    font-size: 26px;
+
+    margin-bottom: 10px;
+}
+
+#inicioJogo p {
+
+    color: #888;
+}
+
+.alvo {
+
+    position: absolute;
+
+    display: none;
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    border: 2px solid #00ff66;
+
+    background: #001a0a;
+
+    color: #00ff66;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 10px #00ff66,
+        0 0 25px
+        rgba(0, 255, 102, .6);
+
+    z-index: 5;
+}
+
+.alvo:active {
+
+    transform: scale(.8);
+}
+
+.fim-jogo {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        rgba(0, 0, 0, .94);
+
+    z-index: 10;
+}
+
+.fim-jogo h3 {
+
+    color: #00ff66;
+
+    font-size: 25px;
+}
+
+.fim-jogo p {
+
+    color: #888;
+
+    margin-top: 10px;
+}
+
+#pontuacaoFinal {
+
+    color: #00ff66;
+
+    font-size: 55px;
+
+    margin: 10px;
+
+    text-shadow:
+        0 0 20px #00ff66;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 800px) {
 
     .navbar {
+
         flex-wrap: wrap;
 
-        gap: 15px;
+        justify-content: center;
+    }
+
+    .logo {
+
+        width: 100%;
+
+        text-align: center;
     }
 
     nav {
+
         order: 3;
 
         width: 100%;
 
         justify-content: center;
 
-        gap: 15px;
+        flex-wrap: wrap;
     }
 
-    nav a {
-        font-size: 11px;
+    .cards,
+    .project-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .status {
+
+        grid-template-columns: 1fr;
     }
 
     .hero {
-        min-height: 80vh;
+
+        min-height: 75vh;
+
+        padding-top: 50px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    nav {
+
+        gap: 12px;
+    }
+
+    nav a {
+
+        font-size: 10px;
+    }
+
+    .hero h1 {
+
+        font-size: 43px;
     }
 
     .section {
+
+        width: 92%;
+
         padding: 70px 0;
     }
 
-    .content-panel {
-        padding: 22px;
+    .jogos-conteudo {
+
+        padding: 15px;
     }
 
-  }
+    .jogo-card {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .campo-jogo {
+
+        height: 350px;
+    }
+
+    }
